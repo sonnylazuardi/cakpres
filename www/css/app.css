@@ -7,9 +7,11 @@ body {
   padding: 0;
   margin: 0;
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif !important;
+  color: #fff;
 }
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6  {
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif !important;
+  color: #fff;
 }
 .menu {
   list-style: none;
@@ -52,8 +54,13 @@ a.tab-item:hover {
   color: #fff;
 }
 
+.content { 
+  overflow: auto;
+  margin-bottom: 40px;
+}
+
 .has-header {
-  margin-top: 40px;
+  /*margin-top: 40px;*/
 }
 
 .logo {
@@ -63,3 +70,16 @@ a.tab-item:hover {
   margin: 20px auto;
 
 }
+
+.calon img{
+  width: 100%;
+  border-radius: 50%;
+}
+
+.soal {
+  font-size: 2em;
+  line-height: 1.2em;
+  padding: 20px 10px;
+}
+
+.

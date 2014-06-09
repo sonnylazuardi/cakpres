@@ -38,5 +38,10 @@ angular.module('myApp.routes', ['ngRoute'])
          controller: 'HelpCtrl'
       });
 
+       $routeProvider.when('/faq', {
+         templateUrl: 'partials/faq.html',
+         controller: 'FaqCtrl'
+      });
+
       $routeProvider.otherwise({redirectTo: '/home'});
    }]);
