@@ -1,44 +1,49 @@
+<div class="bar bar-header bar-dark">
+  <h1 class="title">Account</h1>
+</div>
 
-<h2>Account</h2>
-
-<form>
-    <fieldset>
-        <legend>Profile</legend>
-
-        <label>
-            <span>Name:</span>
+<div class="content has-header padding">
+    <h2>Profil</h2>
+    <div class="list">
+        <label class="item item-input">
+            <span class="input-label">Nama</span>
             <input type="text" name="name" ng-model="user.name"/>
         </label>
 
-        <label>
-            <span>Email:</span>
+        <label class="item item-input">
+            <span class="input-label">Email</span>
             <input type="text" name="name" ng-model="user.email"/>
         </label>
-    </fieldset>
+    </div>
 
-    <fieldset>
-        <legend>Change Password</legend>
+    <h2>Ganti Password</h2>
 
-        <label>
-            <span>Old Password:</span>
+    <div class="list">
+        
+        <label class="item item-input">
+            <span class="input-label">Pass Lama</span>
             <input type="password" ng-keypress="reset()" ng-model="oldpass"/>
         </label>
 
-        <label>
-            <span>New Password:</span>
+        <label class="item item-input">
+            <span class="input-label">Pass Baru</span>
             <input type="password" ng-keypress="reset()" ng-model="newpass"/>
         </label>
 
-        <label>
-            <span>Confirm Password:</span>
+        <label class="item item-input">
+            <span class="input-label">Confirm</span>
             <input type="password" ng-keypress="reset()" ng-model="confirm"/>
         </label>
 
-        <button ng-click="updatePassword()">update password</button>
+        <button ng-click="updatePassword()" class="button button-block button-dark">Ganti password</button>
 
         <p class="error" ng-show="err">{{err}}</p>
         <p class="good" ng-show="msg">{{msg}}</p>
-    </fieldset>
-</form>
 
-<button ng-click="logout()">Log Out</button>
+    </div>
+
+    <button ng-click="logout()" class="button button-block button-assertive">Log Out</button>
+
+</div>
+
+<div ng-include src="'partials/footer.html'"></div>
