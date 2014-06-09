@@ -3,16 +3,37 @@
 </div>
 
 <div class="content has-header padding">
-	<h2>Help</h2>
-
-	<p class="status good" ng-show-auth="login">Hello! You are logged in.</p>
-	<p class="status" ng-show-auth="logout">Not logged in</p>
-	<p class="status error" ng-show-auth="error">{{auth.error}}</p>
-
-	<input ng-model="syncedValue" type="text" /> <b>{{syncedValue}}</b>
-
-	<p>Open <a href="{{FBURL}}/syncedValue">Forge</a> or a <a target="_blank" href="index.html">new window</a> to see this input update in real time:</p>
-
+	<h2>Help & Instruction</h2>
+	<div class="card">
+	  <div class="item item-text-wrap">
+		Anda dapat memilih halaman pada menu yang tersedia dibawah, yaitu menu FAQ, Infographic, Game, Hall dan Badges.
+	  </div>
+	</div>
+	<div class="card">
+	  <div class="item item-text-wrap">
+		Pada menu FAQ Anda dapat mengetahui pertanyaan-pertanyaan yang sering diajukan seputar pemilu capres 2014.
+	  </div>
+	</div>
+	<div class="card">
+	  <div class="item item-text-wrap">
+		Pada menu Pelanggaran Anda dapat mengetahui pelanggaran-pelanggaran yang dilakukan dalam pemilihan calon legislatif dan kampanye oleh tiap calon presiden dan calon wakil presiden.
+	  </div>
+	</div>
+	<div class="card">
+	  <div class="item item-text-wrap">
+		Pada menu game Anda dapat memainkan game dimana Anda akan diajukan pernyataan seputar calon presiden dan calon wakil presiden pada pemilu 2014, dan Anda harus menentukan pernyataan tersebut milik siapa dalam waktu 5 detik. Pada game ini Anda akan melawan pemain lain dalam menjawab pernyataan tersebut.
+	  </div>
+	</div>
+	<div class="card">
+	  <div class="item item-text-wrap">
+		Pada menu Hall Anda dapat melihat highscore tertinggi yang didapatkan oleh semua orang yang pernah berpartisipasi pada game ini.
+	  </div>
+	</div>	
+	<div class="card">
+	  <div class="item item-text-wrap">
+		Pada menu Badges Anda dapat melihat pencapaian-pencapaian yang telah Anda raih saat memainkan game ini.
+	  </div>
+	</div>	
 </div>
 
 <div ng-include src="'partials/footer.html'"></div>
