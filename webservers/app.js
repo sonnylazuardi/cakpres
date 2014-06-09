@@ -7,6 +7,7 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 var _ = require('underscore');
+var request = require('request');
 
 var app = express();
 
@@ -24,60 +25,31 @@ app.use(express.static(path.join(__dirname, 'public')));
 var users = [];
 var onlineUsers = [];
 var answerers = {};
-var idsoal = 0;
+
+var calon_set = ['hr', 'jk', 'jw', 'ps'];
+
+var idcalon = 0;
+var idjenis = 0;
+var idpertanyaan = 0;
+
 var jawab = '';
 var counter = 10;
 var answerPosition = 1;
-var songs = [
-    {title:'Serba Salah', artist:'Raisa'},
-    {title:'Could It Be', artist:'Raisa'},
-    {title:'Pergilah', artist:'Raisa'},
-    {title:'Apalah (Arti Menunggu)', artist:'Raisa'},
-    {title:'Bye Bye', artist:'Raisa'},
-    {title:'Cinta Sempurna', artist:'Raisa'},
-    {title:'Firasat', artist:'Raisa'},
-    {title:'Inginku', artist:'Raisa'},
-    {title:'Mantan Terindah', artist:'Raisa'},
-    {title:'Melangkah', artist:'Raisa'},
-    {title:'Pemeran Utama', artist:'Raisa'},
-    {title:'Terjebak Nostalgia', artist:'Raisa'},
-    {title:'Akhir Persahabatan', artist:'Afgan'},
-    {title:'Betapa Aku Cinta Padamu', artist:'Afgan'},
-    {title:'Biru', artist: 'Afgan'},
-    {title:'Bukan Cinta Biasa', artist: 'Afgan'},
-    {title:'Entah', artist: 'Afgan'},
-    {title:'Hanya Ada Satu', artist: 'Afgan'},
-    {title:'Hilang Rasa', artist: 'Afgan'},
-    {title:'I.L.U.', artist: 'Afgan'},
-    {title:'Klise', artist: 'Afgan'},
-    {title:'My Confession', artist: 'Afgan'},
-    {title:'PadaMu Ku Bersujud', artist: 'Afgan'},
-    {title:'Sadis', artist: 'Afgan'},
-    {title:'Shanty Lussy', artist: 'Afgan'},
-    {title:'Tanpa Batas Waktu', artist: 'Afgan'},
-    {title:'Terima Kasih Cinta', artist: 'Afgan'},
-    {title:'Wajahmu Mengalihkan Duniaku', artist: 'Afgan'},
-    {title:'Yang Ku Tahu Cinta Itu Indah', artist: 'Afgan'},
-    {title:'Adam N Eve', artist:'Nidji'},
-    {title:'Airin', artist:'Nidji'},
-    {title:'Akhir Cinta Abadi', artist:'Nidji'},
-    {title:'Amild Cutting - Biarlah', artist:'Nidji'},
-    {title:'Angel', artist:'Nidji'},
-    {title:'Arti Sahabat', artist:'Nidji'},
-    {title:'Bebas Untuk Menang', artist:'Nidji'},
-    {title:'BeBe', artist:'Nidji'},
-    {title:'Believe', artist:'Nidji'},
-    {title:'Biarlah', artist:'Nidji'},
-    {title:'Bila Aku Jatuh Cinta', artist:'Nidji'},
-];
+
 
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/hello', function(req, res) {
-	res.send('Hello World!')
+app.get('/', function(req, res) {
+	res.send('Cakpres API v.0.0.1!')
+});
+
+app.get('/api/test', function(req, res) {
+    request("http://api.pemiluapi.org/calonpresiden/api/caleg?apiKey=fea6f7d9ec0b31e256a673114792cb17", function(error, response, body) {
+      res.send(body);
+    });
 });
 
 var server = http.createServer(app).listen(app.get('port'), function(){
@@ -149,7 +121,8 @@ function timer() {
     setTimeout(function () {
         counter--;
         if (counter < 0) {
-            soal = Math.floor((Math.random()*songs.length-1)+1);
+            idcalon = Math.floor((Math.random()*calon_set.length-1)+1);
+
             jawab = songs[soal].artist;
             counter = 10;
             answerPosition = 1;

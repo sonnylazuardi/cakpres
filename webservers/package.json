@@ -7,6 +7,10 @@
   },
   "dependencies": {
     "express": "3.4.1",
+    "socket.io": "*",
+    "underscore": "*",
+    "socket.io": "*",
+    "request": "*",
     "jade": "*"
   }
 }
