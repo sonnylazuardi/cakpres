@@ -35,3 +35,26 @@ body {
 a.tab-item, a.tab-item:hover  {
   text-decoration: none;
 }
+
+a.tab-item:hover {
+  color: #ff9500;
+}
+
+.tabs-dark > .tabs, .tabs.tabs-dark {
+  border-color: #111;
+  background-color: #444;
+  background-image: linear-gradient(0deg, #111, #111 50%, transparent 50%);
+  color: #fff;
+}
+
+.has-header {
+  margin-top: 40px;
+}
+
+.logo {
+  background: url('../img/cakpres.png') no-repeat;
+  width: 250px;
+  height: 259px;
+  margin: 20px auto;
+
+}

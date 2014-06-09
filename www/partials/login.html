@@ -1,25 +1,27 @@
 <div class="content padding">
     
-    <h1>Login</h1>
-<form>
-    <div class="list list-inset">
-        <label class="item item-input">
-            <input type="text" placeholder="Email" ng-model="email">
-        </label>
-        <label class="item item-input">
-            <input type="password" placeholder="Password" ng-model="password">
-        </label>
-        <label ng-cloak ng-show="createMode" class="item item-input">
-            <input type="password" placeholder="Confirm Password" ng-model="confirm" />
-        </label>
-    </div>    
+    
+    <div class="logo"></div>
 
-    <button ng-click="login()" ng-hide="createMode" class="button button-dark button-block">Log In</button>
-    <button ng-click="createMode = true" ng-hide="createMode" class="button button-dark button-block">Register</button>
-    <button ng-cloak ng-show="createMode" ng-click="createAccount()" class="button button-dark button-block">Create Account</button>
-    <button ng-cloak ng-show="createMode" ng-click="createMode = false" class="button button-dark button-block">Cancel</button>
+    <form>
+        <div class="list list-inset">
+            <label class="item item-input">
+                <input type="text" placeholder="Email" ng-model="email" />
+            </label>
+            <label class="item item-input">
+                <input type="password" placeholder="Password" ng-model="pass" />
+            </label>
+            <label ng-cloak ng-show="createMode" class="item item-input">
+                <input type="password" placeholder="Confirm Password" ng-model="confirm" />
+            </label>
+        </div>    
 
-    <p ng-show="err" class="error">{{err}}</p>
-</form>
+        <button ng-click="login()" ng-hide="createMode" class="button button-dark button-block">Log In</button>
+        <button ng-click="createMode = true" ng-hide="createMode" class="button button-dark button-block">Register</button>
+        <button ng-cloak ng-show="createMode" ng-click="createAccount()" class="button button-dark button-block">Create Account</button>
+        <button ng-cloak ng-show="createMode" ng-click="createMode = false" class="button button-dark button-block">Cancel</button>
+
+        <p ng-show="err" class="error">{{err}}</p>
+    </form>
 
 </div>
