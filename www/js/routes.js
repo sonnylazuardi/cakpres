@@ -26,5 +26,11 @@ angular.module('myApp.routes', ['ngRoute'])
          controller: 'LoginCtrl'
       });
 
+      $routeProvider.when('/game', {
+         authRequired: true,
+         templateUrl: 'partials/game.html',
+         controller: 'GameCtrl'
+      });
+
       $routeProvider.otherwise({redirectTo: '/home'});
    }]);

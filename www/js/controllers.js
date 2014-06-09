@@ -3,11 +3,11 @@
 /* Controllers */
 
 angular.module('myApp.controllers', [])
-   .controller('HomeCtrl', ['$scope', 'syncData', function($scope, syncData) {
+   .controller('HomeCtrl', function($scope, syncData) {
       syncData('syncedValue').$bind($scope, 'syncedValue');
-   }])
+   })
 
-  .controller('ChatCtrl', ['$scope', 'syncData', function($scope, syncData) {
+  .controller('ChatCtrl', function($scope, syncData) {
       $scope.newMessage = null;
 
       // constrain number of messages by limit into syncData
@@ -21,9 +21,9 @@ angular.module('myApp.controllers', [])
             $scope.newMessage = null;
          }
       };
-   }])
+   })
 
-   .controller('LoginCtrl', ['$scope', 'loginService', '$location', function($scope, loginService, $location) {
+   .controller('LoginCtrl', function($scope, loginService, $location) {
       $scope.email = null;
       $scope.pass = null;
       $scope.confirm = null;
@@ -77,9 +77,15 @@ angular.module('myApp.controllers', [])
          }
          return !$scope.err;
       }
-   }])
+   })
+   
+   .controller('GameCtrl', function($scope, $http) {
+      $http.get('http://api.pemiluapi.org/calonpresiden/api/caleg?apiKey=fea6f7d9ec0b31e256a673114792cb17').success(function(data) {
+         console.log(data);
+      });
+   })
 
-   .controller('AccountCtrl', ['$scope', 'loginService', 'syncData', '$location', function($scope, loginService, syncData, $location) {
+   .controller('AccountCtrl', function($scope, loginService, syncData, $location) {
       syncData(['users', $scope.auth.user.uid]).$bind($scope, 'user');
 
       $scope.logout = function() {
@@ -120,4 +126,4 @@ angular.module('myApp.controllers', [])
          }
       }
 
-   }]);
+   });
