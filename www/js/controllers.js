@@ -101,7 +101,7 @@ angular.module('myApp.controllers', [])
 			 
 			 for(var i=0;i<10;i++){
 				//console.log(scoreArr[i]);
-				if($scope.score*500 >= scoreArr[i]){
+				if($scope.score >= scoreArr[i]){
 					badgesCount+=1;
 				}
 			 }
