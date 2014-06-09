@@ -31,6 +31,12 @@ angular.module('myApp.routes', ['ngRoute'])
          templateUrl: 'partials/game.html',
          controller: 'GameCtrl'
       });
+	  
+	  $routeProvider.when('/help', {
+         authRequired: false,
+         templateUrl: 'partials/help.html',
+         controller: 'HelpCtrl'
+      });
 
        $routeProvider.when('/faq', {
          templateUrl: 'partials/faq.html',
