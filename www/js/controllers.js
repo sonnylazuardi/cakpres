@@ -84,6 +84,12 @@ angular.module('myApp.controllers', [])
          console.log(data);
       });
    })
+   
+   .controller('HelpCtrl', function($scope, $http) {
+      $http.get('http://api.pemiluapi.org/calonpresiden/api/caleg?apiKey=fea6f7d9ec0b31e256a673114792cb17').success(function(data) {
+         console.log(data);
+      });
+   })
 
    .controller('AccountCtrl', function($scope, loginService, syncData, $location) {
       syncData(['users', $scope.auth.user.uid]).$bind($scope, 'user');
