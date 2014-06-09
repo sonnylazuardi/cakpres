@@ -2,21 +2,9 @@
   <h1 class="title">Cakpres Game</h1>
 </div>
 
-<div class="content has-header padding">
+<div class="content has-header padding scroll-content">
 	<h2>FAQ</h2>
 	Search: <input ng-model="query">
-	<ion-scroll
-    [delegate-handle=""]
-    [direction="y"]
-    [paging=""]
-    [on-refresh=""]
-    [on-scroll=""]
-    [scrollbar-x=""]
-    [scrollbar-y=""]
-    [zooming=""]
-    [min-zoom=""]
-    [max-zoom=""]>
-
 	<div class="card" ng-repeat="question in questions | filter:query">
 		<div class="item item-divider">
     		{{question.question}}
@@ -25,8 +13,6 @@
 		  {{question.answer}}
 		</div>
 	</div>
-
-	 </ion-scroll>
 </div>
 
 <div ng-include src="'partials/footer.html'"></div>
