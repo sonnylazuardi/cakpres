@@ -4,15 +4,29 @@
 
 <div class="content has-header padding">
 	<h2>FAQ</h2>
+	Search: <input ng-model="query">
+	<ion-scroll
+    [delegate-handle=""]
+    [direction="y"]
+    [paging=""]
+    [on-refresh=""]
+    [on-scroll=""]
+    [scrollbar-x=""]
+    [scrollbar-y=""]
+    [zooming=""]
+    [min-zoom=""]
+    [max-zoom=""]>
 
-	<p class="status good" ng-show-auth="login">Hello! You are logged in.</p>
-	<p class="status" ng-show-auth="logout">Not logged in</p>
-	<p class="status error" ng-show-auth="error">{{auth.error}}</p>
+	<div class="card" ng-repeat="question in questions | filter:query">
+		<div class="item item-divider">
+    		{{question.question}}
+  		</div>
+		<div class="item item-text-wrap">
+		  {{question.answer}}
+		</div>
+	</div>
 
-	<input ng-model="syncedValue" type="text" /> <b>{{syncedValue}}</b>
-
-	<p>Open <a href="{{FBURL}}/syncedValue">Forge</a> or a <a target="_blank" href="index.html">new window</a> to see this input update in real time:</p>
-
+	 </ion-scroll>
 </div>
 
 <div ng-include src="'partials/footer.html'"></div>
