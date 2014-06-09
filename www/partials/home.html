@@ -1,10 +1,18 @@
-<h2>Home</h2>
+<div ng-include src="'partials/header.html'"></div>
 
-<p class="status good" ng-show-auth="login">Hello! You are logged in.</p>
-<p class="status" ng-show-auth="logout">Not logged in</p>
-<p class="status error" ng-show-auth="error">{{auth.error}}</p>
+<div class="content has-header padding">
+	<h1>Test</h1>
+	
+	<h2>Home</h2>
 
-<input ng-model="syncedValue" type="text" /> <b>{{syncedValue}}</b>
+	<p class="status good" ng-show-auth="login">Hello! You are logged in.</p>
+	<p class="status" ng-show-auth="logout">Not logged in</p>
+	<p class="status error" ng-show-auth="error">{{auth.error}}</p>
 
-<p>Open <a href="{{FBURL}}/syncedValue">Forge</a> or a <a target="_blank" href="index.html">new window</a> to see this input update in real time:</p>
+	<input ng-model="syncedValue" type="text" /> <b>{{syncedValue}}</b>
 
+	<p>Open <a href="{{FBURL}}/syncedValue">Forge</a> or a <a target="_blank" href="index.html">new window</a> to see this input update in real time:</p>
+
+</div>
+
+<div ng-include src="'partials/footer.html'"></div>

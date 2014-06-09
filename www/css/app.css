@@ -1,66 +1,37 @@
 /* app css stylesheet */
-
-.hide {
-   display: none;
+body {
+  background: #ff9500;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
 }
-
 .menu {
   list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
-}
-
-.menu:before {
-  content: "[";
-}
-
-.menu:after {
-  content: "]";
-}
-
-.menu > li {
-  display: inline;
-}
-
-.menu > li.hide {
-   display: none;
-}
-
-.menu > li:before {
-  content: "|";
-  padding-right: 0.3em;
-}
-
-.menu > li:nth-child(1):before {
-  content: "";
+  margin: 0;
   padding: 0;
+  background: #4a4e54;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 60px;
+  text-align: center;
 }
 
-p.status {
-   color: red;
+.menu li {
+  display: inline-block;
+  text-align: center;
 }
 
-p.status.good, p.good {
-   color: green;
+.menu li a {
+  color: #fff;
+  padding: 10px 25px;
+  background: #4a4e54;
+  text-align: center;
+  line-height: 4em;
 }
 
-form label {
-   display: block;
-   margin: 15px 0;
-}
-
-form label span {
-   display: block;
-   font-weight: bold;
-}
-
-.error {
-   color: red;
-}
-
-fieldset {
-   float: left;
-   margin-right: 25px;
-   padding: 25px;
+a.tab-item, a.tab-item:hover  {
+  text-decoration: none;
 }
