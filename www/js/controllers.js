@@ -115,7 +115,7 @@ angular.module('myApp.controllers', [])
          'width': 50,
          'height': 60,
          'displayInput': false,
-         'fgColor':"#222222"
+         'fgColor':"#444444"
       };
       $scope.select = function(id) {
          if ($scope.aktif == 0) {
