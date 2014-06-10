@@ -218,7 +218,7 @@ angular.module('myApp.controllers', [])
       });
    })
 
-   .controller('ViolationCtrl', function($scope, $http, $routeParams, $rootScope) {
+   .controller('ViolationCtrl', function($scope, $http, $routeParams, Violation) {
       // $scope.violations = {data:{results:{reports:null}}};
       // $http.get('http://api.pemiluapi.org/laporan_pelanggaran/api/reports?apiKey=fea6f7d9ec0b31e256a673114792cb17').success(function(data) {
       //    console.log(data);
@@ -226,75 +226,83 @@ angular.module('myApp.controllers', [])
       // });
       // if ($rootScope.violations['data']) {
          // $scope.violations = $rootScope.violations['data']['results']['reports'];
-         if ($routeParams.id == 'jokowi') { 
-            $scope.filter = 'pdi';
-            $scope.subject = 'Joko Widodo';
-         } else if ($routeParams.id == 'prabowo') {
-            $scope.filter = 'gerindra';
-            $scope.subject = 'Prabowo Subianto';
-         } else if ($routeParams.id == 'jusuf') {
-            $scope.filter = 'golkar';
-            $scope.subject = 'Jusuf Kalla';
-         } else if ($routeParams.id == 'hatta') {
-            $scope.filter = 'amanat nasional';
-            $scope.subject = 'Hatta Rajasa';
-         } else
-            $scope.filter = '';
+         Violation.getData().then(function(violations) {
+
+
+            $scope.violations = violations;
+            if ($routeParams.id == 'jokowi') { 
+               $scope.filter = 'pdi';
+               $scope.subject = 'Joko Widodo';
+            } else if ($routeParams.id == 'prabowo') {
+               $scope.filter = 'gerindra';
+               $scope.subject = 'Prabowo Subianto';
+            } else if ($routeParams.id == 'jusuf') {
+               $scope.filter = 'golkar';
+               $scope.subject = 'Jusuf Kalla';
+            } else if ($routeParams.id == 'hatta') {
+               $scope.filter = 'amanat nasional';
+               $scope.subject = 'Hatta Rajasa';
+            } else
+               $scope.filter = '';
+
+         });
       // }
       // });
    })
 
-   .controller('ViolationCategoryCtrl', function($scope, filterFilter, $http, $rootScope) {
+   .controller('ViolationCategoryCtrl', function($scope, filterFilter, $http, Violation) {
       // $http.get('http://api.pemiluapi.org/laporan_pelanggaran/api/reports?apiKey=fea6f7d9ec0b31e256a673114792cb17').success(function(data) {
       // console.log(data);
-      $scope.violations = $rootScope.violations['data']['results']['reports'];
-      console.log(filterFilter($scope.violations,'pdi'));
-      $scope.chartConfig = {
-         chart: {
-           
-         },
-         title: {
-            text: ''
-         },
-         tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-         },
-         plotOptions: {
-            pie: {
-               allowPointSelect: true,
-               cursor: 'pointer',
-               dataLabels: {
-                  enabled: true,
-                  color: '#FFFFFF',
-                  connectorColor: '#FFFFFF',
-                  formatter: function () {
-                     return '<b>' + this.point.name + '</b>: ' + this.percentage + ' %';
-                  }
-               }
-            }
-        },
-         series: [{
-            type: 'pie',
-            name: 'overall',
-            point: {
-               events: {
-                  click: function(e) {
-                  //this.slice();
-                  //console.log(e);
-                  location.href = e.point.url;
-                  e.preventDefault();
-                  }
-               }
+      Violation.getData().then(function(violations) {
+         $scope.violations = violations['data']['results']['reports'];
+         console.log(filterFilter($scope.violations,'pdi'));
+         $scope.chartConfig = {
+            chart: {
+              
             },
-            data: [
-               {name: 'Joko Widodo', y: filterFilter($scope.violations,'pdi').length, color:'#f42539', url: '#/violation/jokowi'},
-               {name: 'Prabowo Subianto', y: filterFilter($scope.violations,'gerindra').length, color:'#4cfd69', url: '#/violation/prabowo'},
-               {name: 'Hatta Rajasa', y: filterFilter($scope.violations,'amanat nasional').length, color:'#974cfd', url: '#/violation/hatta'},
-               {name: 'Jusuf Kalla', y: filterFilter($scope.violations,'golkar').length, color:'#f9fc20', url: '#/violation/jusuf'}
-            ]
-         }]
-      }    
-      // });
+            title: {
+               text: ''
+            },
+            tooltip: {
+               pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+               pie: {
+                  allowPointSelect: true,
+                  cursor: 'pointer',
+                  dataLabels: {
+                     enabled: true,
+                     color: '#FFFFFF',
+                     connectorColor: '#FFFFFF',
+                     formatter: function () {
+                        return '<b>' + this.point.name + '</b>: ' + this.percentage + ' %';
+                     }
+                  }
+               }
+           },
+            series: [{
+               type: 'pie',
+               name: 'overall',
+               point: {
+                  events: {
+                     click: function(e) {
+                     //this.slice();
+                     //console.log(e);
+                     location.href = e.point.url;
+                     e.preventDefault();
+                     }
+                  }
+               },
+               data: [
+                  {name: 'Joko Widodo', y: filterFilter($scope.violations,'pdi').length, color:'#f42539', url: '#/violation/jokowi'},
+                  {name: 'Prabowo Subianto', y: filterFilter($scope.violations,'gerindra').length, color:'#4cfd69', url: '#/violation/prabowo'},
+                  {name: 'Hatta Rajasa', y: filterFilter($scope.violations,'amanat nasional').length, color:'#974cfd', url: '#/violation/hatta'},
+                  {name: 'Jusuf Kalla', y: filterFilter($scope.violations,'golkar').length, color:'#f9fc20', url: '#/violation/jusuf'}
+               ]
+            }]
+         }    
+      });
+      
    })
 
     .controller('FaqCtrl', function($scope, $http) {
