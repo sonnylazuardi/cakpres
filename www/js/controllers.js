@@ -213,6 +213,33 @@ angular.module('myApp.controllers', [])
       });
    })
 
+   .controller('ViolationCtrl', function($scope, $http, $routeParams) {
+      $http.get('http://api.pemiluapi.org/laporan_pelanggaran/api/reports?apiKey=fea6f7d9ec0b31e256a673114792cb17').success(function(data) {
+         console.log(data);
+         $scope.violations = data['data']['results']['reports'];
+         if ($routeParams.id == 'jokowi') { 
+            $scope.filter = 'PDI';
+            $scope.subject = 'Joko Widodo';
+         } else if ($routeParams.id == 'prabowo') {
+            $scope.filter = 'gerindra';
+            $scope.subject = 'Prabowo Subianto';
+         } else if ($routeParams.id == 'jusuf') {
+            $scope.filter = 'golkar';
+            $scope.subject = 'Jusuf Kalla';
+         } else if ($routeParams.id == 'hatta') {
+            $scope.filter = 'amanat nasional';
+            $scope.subject = 'Hatta Rajasa';
+         } else
+            $scope.filter = '';
+      });
+   })
+
+   .controller('ViolationCategoryCtrl', function($scope, $http) {
+      $http.get('http://api.pemiluapi.org/laporan_pelanggaran/api/reports?apiKey=fea6f7d9ec0b31e256a673114792cb17').success(function(data) {
+         console.log(data);
+      });
+   })
+
     .controller('FaqCtrl', function($scope, $http) {
       $http.get('http://api.pemiluapi.org/faq-presiden/api/questions?apiKey=fea6f7d9ec0b31e256a673114792cb17').success(function(data) {
          console.log(data);         

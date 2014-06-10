@@ -1,0 +1,27 @@
+<div class="bar bar-header bar-dark">
+	<h1 class="title">Pelanggaran {{subject}}</h1>
+</div>
+
+<div class="content has-header padding scroll-content">
+	<h4></h4>
+	<!-- Cari : <input ng-model="query"> -->
+	<div class="list list-inset">
+		<label class="item item-input">
+		<i class="icon ion-search placeholder-icon"></i>
+		<input type="text" placeholder="Cari Pelanggaran" ng-model="query">
+		</label>
+	</div>
+
+	<p>Banyaknya pelanggaran: {{(violations|filter:filter).length}} dari {{violations.length}}</p>
+
+	<div class="card" ng-repeat="violation in violations | filter:filter | filter:query">
+		<div class="item item-divider">
+			{{violation.judul_laporan}}
+		</div>
+		<div class="item item-text-wrap">
+			{{violation.keterangan}}
+		</div>
+	</div>
+</div>
+
+<div ng-include src="'partials/footer.html'"></div>
