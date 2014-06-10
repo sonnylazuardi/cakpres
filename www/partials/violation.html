@@ -14,8 +14,12 @@
 	</div>
 
 	<p>Banyaknya pelanggaran: {{(violations['data']['results']['reports']|filter:filter).length}} dari {{violations['data']['results']['reports'].length}}</p>
+	
+	<!-- ng-repeat="violation in violations['data']['results']['reports'] | filter:filter | filter:query" -->
 
-	<div class="card" ng-repeat="violation in violations['data']['results']['reports'] | filter:filter | filter:query">
+	<div class="card" 
+		quick-ng-repeat="violation in violations['data']['results']['reports'] | filter:filter | filter:query" quick-repeat-list="violations">
+	
 		<div class="item item-divider">
 			{{violation.judul_laporan}}
 		</div>
