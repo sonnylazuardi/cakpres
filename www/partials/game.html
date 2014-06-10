@@ -1,5 +1,7 @@
 <div class="bar bar-header bar-dark">
+  <button class="button icon ion-chevron-left" ng-click="$back()"></button>
   <h1 class="title">Cakpres Game</h1>
+  <a class="button icon ion-person" href="#/account"></a>
 </div>
 
 <div class="content scroll-content has-header padding">
@@ -17,16 +19,16 @@
       </div>
     </div>
     <div class="row calon">
-        <div class="col-lg-3">
+        <div class="col-xs-3">
             <img src="img/jw.jpg" alt="" ng-click="select(1)" class="{{get_select(1)}}">
         </div>
-        <div class="col-lg-3">
+        <div class="col-xs-3">
             <img src="img/jk.jpg" alt="" ng-click="select(2)" class="{{get_select(2)}}">
         </div>
-        <div class="col-lg-3">
+        <div class="col-xs-3">
             <img src="img/ps.jpg" alt="" ng-click="select(3)" class="{{get_select(3)}}">
         </div>
-        <div class="col-lg-3">
+        <div class="col-xs-3">
             <img src="img/hj.jpg" alt="" ng-click="select(4)" class="{{get_select(4)}}">
         </div>
     </div>
@@ -35,9 +37,9 @@
       <div class="item item-avatar" ng-repeat="answer in answers">
         <img gravatar-src="answer.email" gravatar-size="150">
         <h2>{{answer.name}}</h2>
-        <p ng-show="$index == 0">menjawab dengan benar (+10)</p>
-        <p ng-show="$index == 1">menjawab {{calon_nama[correct_answer]}} dan benar (+4)</p>
-        <p ng-show="$index > 1">menjawab {{calon_nama[correct_answer]}} dan benar (+1)</p>
+        <p ng-show="$index == 0">menjawab benar (+10)</p>
+        <p ng-show="$index == 1">{{calon_nama[correct_answer]}} benar (+4)</p>
+        <p ng-show="$index > 1">{{calon_nama[correct_answer]}} benar (+1)</p>
       </div>
     </ul>
     

@@ -1,4 +1,5 @@
 <div class="bar bar-header bar-dark">
+	<button class="button icon ion-chevron-left" ng-click="$back()"></button>	
 	<h1 class="title">Pelanggaran {{subject}}</h1>
 </div>
 
@@ -18,8 +19,7 @@
 		<div class="item item-divider">
 			{{violation.judul_laporan}}
 		</div>
-		<div class="item item-text-wrap">
-			{{violation.keterangan}}
+		<div class="item item-text-wrap" ng-bind-html="violation.keterangan | replacen">
 		</div>
 	</div>
 </div>

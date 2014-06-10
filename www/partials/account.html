@@ -1,5 +1,6 @@
 <div class="bar bar-header bar-dark">
-  <h1 class="title">Account</h1>
+    <a class="button icon ion-chevron-left" ng-click="$back()"></a>
+    <h1 class="title">Account</h1>
 </div>
 
 <div class="content has-header padding">
@@ -40,14 +41,17 @@
             <input type="password" ng-keypress="reset()" ng-model="confirm"/>
         </label>
 
-        <button ng-click="updatePassword()" class="button button-block button-dark">Ganti password</button>
+        <button ng-click="updatePassword()" class="button button-block button-dark"><i class="icon ion-ios7-refresh"></i> Ganti password</button>
+
+        <a class="button button-block button-dark" href="#/badges"><i class="icon ion-ios7-keypad"></i> Badges</a>
+
 
         <p class="error" ng-show="err">{{err}}</p>
         <p class="good" ng-show="msg">{{msg}}</p>
 
     </div>
 
-    <button ng-click="logout()" class="button button-block button-assertive">Log Out</button>
+    <button ng-click="logout()" class="button button-block button-assertive"><i class="icon ion-ios7-close"></i> Log Out</button>
 
 </div>
 

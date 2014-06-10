@@ -16,12 +16,14 @@
             </label>
         </div>    
 
-        <button ng-click="login()" ng-hide="createMode" class="button button-dark button-block">Log In</button>
-        <button ng-click="createMode = true" ng-hide="createMode" class="button button-dark button-block">Register</button>
-        <button ng-cloak ng-show="createMode" ng-click="createAccount()" class="button button-dark button-block">Create Account</button>
-        <button ng-cloak ng-show="createMode" ng-click="createMode = false" class="button button-dark button-block">Cancel</button>
+        <button ng-click="login()" ng-hide="createMode" class="button button-dark button-block"><i class="icon ion-ios7-unlocked"></i> Log In</button>
+        <button ng-click="createMode = true" ng-hide="createMode" class="button button-dark button-block"><i class="icon ion-ios7-personadd"></i> Register</button>
+        <button ng-cloak ng-show="createMode" ng-click="createAccount()" class="button button-dark button-block"><i class="icon ion-ios7-personadd"></i> Create Account</button>
+        <button ng-cloak ng-show="createMode" ng-click="createMode = false" class="button button-dark button-block"><i class="icon ion-ios7-close"></i> Cancel</button>
 
         <p ng-show="err" class="error">{{err}}</p>
     </form>
 
 </div>
+
+<div ng-include src="'partials/footer.html'"></div>
