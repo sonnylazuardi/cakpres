@@ -38,10 +38,21 @@ angular.module('myApp.routes', ['ngRoute'])
          controller: 'BadgesCtrl'
       });
 	  
-	  $routeProvider.when('/help', {
+     $routeProvider.when('/help', {
          authRequired: false,
          templateUrl: 'partials/help.html',
          controller: 'HelpCtrl'
+      });
+
+     $routeProvider.when('/violation_category', {
+         authRequired: false,
+         templateUrl: 'partials/violation_category.html',
+         controller: 'ViolationCategoryCtrl'
+      });
+
+	  $routeProvider.when('/violation/:id', {
+         templateUrl: 'partials/violation.html',
+         controller: 'ViolationCtrl'
       });
 
        $routeProvider.when('/faq', {
