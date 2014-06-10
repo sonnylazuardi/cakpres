@@ -79,10 +79,65 @@ angular.module('myApp.controllers', [])
       }
    })
    
-   .controller('GameCtrl', function($scope, $http) {
-      $http.get('http://api.pemiluapi.org/stamps/api/stamps?apiKey=fea6f7d9ec0b31e256a673114792cb17').success(function(data) {
+   .controller('GameCtrl', function($scope, $http, syncData) {
+      syncData(['users', $scope.auth.user.uid]).$bind($scope, 'user');
+      $scope.calon_set = ['', 'jw', 'jk', 'ps', 'hr'];
+      $scope.aktif = 0;
+      $scope.benar = -1;
+      $scope.salah = -1;
+      $scope.soal = '';
+      $scope.counter = 8;
+      $scope.select = function(id) {
+         if ($scope.aktif == 0) {
+            $scope.aktif = id;
+            console.log($scope.auth.user.uid);
+            $scope.socket.emit('jawab', {jawab: $scope.calon_set[$scope.aktif], email: $scope.user.email, id: $scope.auth.user.uid});
+         }
+      }
+      $scope.get_select = function(id) {
+         if (id == $scope.benar) {
+            return 'benar';
+         } else if (id == $scope.salah) {
+            return 'salah';
+         } else if ($scope.aktif == 0) {
+            return 'blur';
+         } else if ($scope.aktif == id) {
+            return 'aktif';
+         }
+      }
+      $scope.socket = io.connect('http://cakpres.suitdev.com:3000/', {'force new connection': true});
+      $scope.socket.on('soal', function (data) {
          console.log(data);
+         $scope.soal = data.soal;
+         $scope.counter = data.counter+1;
+         $scope.aktif = 0;
+         $scope.benar = -1;
+         $scope.salah = -1;
+         $scope.$apply();
       });
+
+      $scope.socket.on('hasil', function (data) {
+         var aktif = $scope.aktif;
+         if (data.status) {
+            $scope.benar = aktif;
+         } else {
+            $scope.salah = aktif;
+         }
+         $scope.$apply();
+      });
+
+      $scope.timer = function() {
+         setTimeout(function() {
+            if ($scope.counter > 0) {
+               $scope.counter -= 1;
+               $scope.$apply();
+            }
+            $scope.timer();
+         }, 1000);
+      }
+
+      $scope.timer();
+
    })
    
    .controller('BadgesCtrl', function($scope, syncData, $http) {

@@ -74,6 +74,7 @@ a.tab-item:hover {
 .calon img{
   width: 100%;
   border-radius: 50%;
+  cursor: pointer;
 }
 
 .soal {
@@ -82,4 +83,27 @@ a.tab-item:hover {
   padding: 20px 10px;
 }
 
-.
+.card h2{
+  color: #000;
+}
+
+.blur {
+  /*opacity: .5;*/
+}
+
+.aktif {
+  /*opacity: 1;*/
+  /*border: 5px solid #e9e33b;*/
+  border: 5px solid #fff;
+  box-shadow: 0px 0px 50px #fff;
+}
+
+.benar {
+  border: 5px solid #edcf72;
+  box-shadow: 0px 0px 50px #edcf72;
+}
+
+.salah {
+  border: 5px solid #fea683;
+  box-shadow: 0px 0px 50px #fea683;
+}

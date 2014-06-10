@@ -1,13 +1,10 @@
-
-/**
- * Module dependencies.
- */
-
 var express = require('express');
 var http = require('http');
 var path = require('path');
 var _ = require('underscore');
 var request = require('request');
+var Firebase = require('firebase');
+var ref = new Firebase('https://cakpres.firebaseio.com/');
 
 var app = express();
 
@@ -92,7 +89,7 @@ var idpertanyaan = 0;
 
 var soal = '';
 var jawab = '';
-var counter = 5;
+var counter = 8;
 var answerPosition = 1;
 
 
@@ -102,7 +99,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', function(req, res) {
-	res.send('Cakpres API v.0.0.1!')
+    res.send('Cakpres API v.0.0.1!')
 });
 
 app.get('/api/refresh', function(req, res) {
@@ -113,7 +110,7 @@ app.get('/api/refresh', function(req, res) {
 });
 
 var server = http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+  console.log('Cakpres listening on port ' + app.get('port'));
 });
 
 // SOCKET.IO starts
@@ -121,58 +118,42 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 var io = require('socket.io').listen(server);
 
 io.sockets.on('connection', function (socket) {
-    socket.on('addUser', function (nama) {
-        socket.nama = nama;
-        onlineUsers.push(nama);
-        var user = _.findWhere(users, {nama: nama});
-        if (!user) users.push({nama:nama, score:0});
-        io.sockets.emit('updateChat', {nama: nama, message: nama + ' baru saja terhubung'});
-        io.sockets.emit('updateUsers', {users: users, online: makeOnline(), counter: counter});
-        socket.emit('updateMe', {score: myScore()});
-    });
     socket.on('jawab', function (data) {
-        var user = _.findWhere(users, {nama: socket.nama});
-        if (jawab.toLowerCase() == data.jawab.toLowerCase()) {
-            if (user && answerPosition <= 5 && !answerers[socket.nama]) {
-                answerers[socket.nama] = true;
-                if (answerPosition == 1)
-                    user.score += 10;
-                else if (answerPosition == 2)
-                    user.score += 4;
-                else
-                    user.score += 1;
-                socket.emit('hasil', {status:true, score:user.score});
-                // users.sort(function(n){ return n.score * -1; });
-                io.sockets.emit('updateUsers', {users: users, online: makeOnline(), counter: counter});
-                io.sockets.emit('updateWinner', {user: socket.nama, position: answerPosition});
-                socket.emit('updateMe', {score: myScore(), position: answerPosition});
-                answerPosition++;
-            }
+        // var user = _.findWhere(users, {nama: socket.nama});
+        if (calon_set[idcalon] == data.jawab) {
+            // if (user && answerPosition <= 5 && !answerers[socket.nama]) {
+                // answerers[socket.nama] = true;
+                // if (answerPosition == 1)
+                //     user.score += 10;
+                // else if (answerPosition == 2)
+                //     user.score += 4;
+                // else
+                //     user.score += 1;
+                // socket.emit('hasil', {status:true, score:user.score});
+                // // users.sort(function(n){ return n.score * -1; });
+                // io.sockets.emit('updateUsers', {users: users, online: makeOnline(), counter: counter});
+                // io.sockets.emit('updateWinner', {user: socket.nama, position: answerPosition});
+                // socket.emit('updateMe', {score: myScore(), position: answerPosition});
+                // answerPosition++;
+            // }
+            socket.emit('hasil', {status: true});
         } else {
-            if (user) {
-                socket.emit('hasil', {status:false, score: user.score});
-            }
+            // if (user) {
+            //     socket.emit('hasil', {status:false, score: user.score});
+            // }
+            socket.emit('hasil', {status: false});
         }
-    });
-    socket.on('sendMessage', function (message) {
-        io.sockets.emit('updateChat', {nama: socket.nama, message: message}); 
     });
     socket.on('disconnect', function () {
-        var index = onlineUsers.indexOf(socket.nama);
-        onlineUsers.splice(index, 1);
-        io.sockets.emit('updateChat', {nama: socket.nama, message: socket.nama + ' terputus'});
-        io.sockets.emit('updateUsers', {users: users, online: makeOnline(), counter: counter});
+        // var index = onlineUsers.indexOf(socket.nama);
+        // onlineUsers.splice(index, 1);
+        // io.sockets.emit('updateChat', {nama: socket.nama, message: socket.nama + ' terputus'});
+        // io.sockets.emit('updateUsers', {users: users, online: makeOnline(), counter: counter});
     });
-    function myScore() {
-        return _.findWhere(users, {nama: socket.nama}).score;
-    }
-    function makeOnline() {
-        var baru = [];
-        for (var i = 0; i < onlineUsers.length; i++) {
-            baru.push({nama: onlineUsers[i], score: _.findWhere(users, {nama: onlineUsers[i]}).score });
-        }
-        return baru;
-    }
+});
+
+request("http://api.pemiluapi.org/calonpresiden/api/caleg?apiKey=fea6f7d9ec0b31e256a673114792cb17", function(error, response, body) {
+    candidate_json = JSON.parse(body);
 });
 
 timer();
@@ -181,17 +162,15 @@ function timer() {
     setTimeout(function () {
         counter--;
         if (counter < 0) {
-            
             var hasil = candidate_json;
             if (hasil.data) {
-                idcalon = Math.floor((Math.random()*calon_set.length-1)+1);
-                idjenis = Math.floor((Math.random()*jenis_set.length-1)+1);
-                // console.log(idjenis);
+                idcalon = Math.floor((Math.random()*calon_set.length-1));
+                idjenis = Math.floor((Math.random()*jenis_set.length-1));
                 var calon = _.findWhere(hasil.data.results.caleg, {id: calon_set[idcalon]});
                 console.log(calon.nama);
                 console.log(jenis_set[idjenis].name);
                 if (jenis_set[idjenis].category == 1) {
-                    idpertanyaan = Math.floor((Math.random()*calon[jenis_set[idjenis].name].length-1)+1);
+                    idpertanyaan = Math.floor((Math.random()*calon[jenis_set[idjenis].name].length-1));
                     soal = calon[jenis_set[idjenis].name][idpertanyaan][jenis_set[idjenis].field];
                     console.log(soal);
                 } else if (jenis_set[idjenis].category == 2) {
@@ -203,24 +182,11 @@ function timer() {
                     console.log(soal);
                 }
             }
-               
-            counter = 5;
+            counter = 8;
             answerPosition = 1;
             answerers = {};
-            // io.sockets.emit('soal', {id: soal, hint: songs[soal].title, soal: acakKata(jawab), counter: counter});
+            io.sockets.emit('soal', {soal: soal, counter: counter});
         }
         timer();
     }, 1000);
-}
-
-function acakKata(data) {
-    var baru = data.split('');
-    for (var i = 0; i < data.length; i++) {
-        var random = Math.floor((Math.random()*data.length-1)+1);
-        var temp = baru[i];
-        baru[i] = baru[random];
-        baru[random] = temp;
-    }
-    hasil = baru.join('');
-    return hasil.toUpperCase();
 }
