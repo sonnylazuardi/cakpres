@@ -218,7 +218,7 @@ angular.module('myApp.controllers', [])
          console.log(data);
          $scope.violations = data['data']['results']['reports'];
          if ($routeParams.id == 'jokowi') { 
-            $scope.filter = 'PDI';
+            $scope.filter = 'pdi';
             $scope.subject = 'Joko Widodo';
          } else if ($routeParams.id == 'prabowo') {
             $scope.filter = 'gerindra';
@@ -234,9 +234,55 @@ angular.module('myApp.controllers', [])
       });
    })
 
-   .controller('ViolationCategoryCtrl', function($scope, $http) {
+   .controller('ViolationCategoryCtrl', function($scope, filterFilter, $http) {
       $http.get('http://api.pemiluapi.org/laporan_pelanggaran/api/reports?apiKey=fea6f7d9ec0b31e256a673114792cb17').success(function(data) {
-         console.log(data);
+      console.log(data);
+      $scope.violations = data['data']['results']['reports'];
+      console.log(filterFilter($scope.violations,'pdi'));
+      $scope.chartConfig = {
+         chart: {
+            backgroundColor:'#FF9500',
+         },
+         title: {
+            text: 'Browser market shares at a specific website, 2014'
+         },
+         tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+         },
+         plotOptions: {
+            pie: {
+               allowPointSelect: true,
+               cursor: 'pointer',
+               dataLabels: {
+                  enabled: true,
+                  format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                  style: {
+                     color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                  }
+               }
+            }
+         },
+         series: [{
+            type: 'pie',
+            name: 'overall',
+            point: {
+               events: {
+                  click: function(e) {
+                  //this.slice();
+                  //console.log(e);
+                  location.href = e.point.url;
+                  e.preventDefault();
+                  }
+               }
+            },
+            data: [
+               {name: 'Joko Widodo', y: filterFilter($scope.violations,'pdi').length, url: '#/violation/jokowi'},
+               {name: 'Prabowo Subianto', y: filterFilter($scope.violations,'gerindra').length, url: '#/violation/prabowo'},
+               {name: 'Hatta Rajasa', y: filterFilter($scope.violations,'amanat nasional').length, url: '#/violation/hatta'},
+               {name: 'Jusuf Kalla', y: filterFilter($scope.violations,'golkar').length, url: '#/violation/jusuf'}
+            ]
+         }]
+      }    
       });
    })
 
