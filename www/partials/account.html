@@ -41,14 +41,14 @@
             <input type="password" ng-keypress="reset()" ng-model="confirm"/>
         </label>
 
-        <button ng-click="updatePassword()" class="button button-block button-dark">Ganti password</button>
+        <button ng-click="updatePassword()" class="button button-block button-dark"><i class="icon ion-ios7-refresh"></i> Ganti password</button>
 
         <p class="error" ng-show="err">{{err}}</p>
         <p class="good" ng-show="msg">{{msg}}</p>
 
     </div>
 
-    <button ng-click="logout()" class="button button-block button-assertive">Log Out</button>
+    <button ng-click="logout()" class="button button-block button-assertive"><i class="icon ion-ios7-close"></i> Log Out</button>
 
 </div>
 

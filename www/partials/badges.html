@@ -1,9 +1,10 @@
 <div class="bar bar-header bar-dark">
-  <h1 class="title">Cakpres Game</h1>
+	<button class="button icon ion-chevron-left" ng-click="$back()"></button>
+  	<h1 class="title">Daftar Badge ({{count}})</h1>
+  	<a class="button icon ion-person" href="#/account"></a>
 </div>
 
 <div class="content scroll-content has-header padding">
-	<h2>Daftar Badge ({{count}})</h2>
 	<div class="card" ng-repeat="badge in badgesArr track by $index">
 	  <div class="item item-text-wrap">
 		<img src="{{badge}}"/> {{$index + 1}}. Mencapai skor {{scoreArr[$index]}}.
