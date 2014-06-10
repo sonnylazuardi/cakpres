@@ -27,4 +27,10 @@ angular.module('myApp.filters', [])
       return function(items) {
          return toArray(items).slice().reverse();
       };
+   })
+
+   .filter('replacen', function() {
+      return function(text) {
+         return text.replace(/\\n/g, '<br>');   
+      }
    });

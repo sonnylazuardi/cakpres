@@ -19,8 +19,7 @@
 		<div class="item item-divider">
 			{{violation.judul_laporan}}
 		</div>
-		<div class="item item-text-wrap">
-			{{violation.keterangan}}
+		<div class="item item-text-wrap" ng-bind-html="violation.keterangan | replacen">
 		</div>
 	</div>
 </div>

@@ -5,11 +5,15 @@
 </div>
 
 <div class="content scroll-content has-header padding">
-	<div class="card" ng-repeat="badge in badgesArr track by $index">
-	  <div class="item item-text-wrap">
-		<img src="{{badge}}"/> {{$index + 1}}. Mencapai skor {{scoreArr[$index]}}.
-	  </div>
+
+	<div class="list card">
+		<div class="item item-avatar" ng-repeat="badge in badgesArr track by $index">
+	      <img src="{{badge}}"/>
+	      <h2>Penghargaan #{{$index + 1}}</h2>
+	      <p>Mencapai skor {{scoreArr[$index]}}</p>
+	    </div>
 	</div>
+
 </div>
 
 <div ng-include src="'partials/footer.html'"></div>
