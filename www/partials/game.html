@@ -1,36 +1,37 @@
 <div class="bar bar-header bar-dark">
   <button class="button icon ion-chevron-left" ng-click="$back()"></button>
   <h1 class="title">Cakpres Game</h1>
-  <a class="button icon ion-person" href="#/account"></a>
+  <a class="button icon ion-person" href="#/account">{{user.score}}</a>
 </div>
 
 <div class="content scroll-content has-header padding">
     <div class="row">
-      <div class="col-lg-9">
+      <div class="col-xs-10">
         <div class="soal">
           {{soal}}
         </div>    
       </div>
-      <div class="col-lg-2">
-        {{counter}}
-      </div>
-      <div class="col-lg-1">
-        {{user.score}}
+      <div class="col-xs-2 knob-pos">
+        <knob knob-data="counter" knob-max='9' knob-options="knobOptions"></knob>
       </div>
     </div>
-    <div class="row calon">
-        <div class="col-xs-3">
+    <div class="calon">
+      <div class="row">
+        <div class="col-xs-6">
             <img src="img/jw.jpg" alt="" ng-click="select(1)" class="{{get_select(1)}}">
         </div>
-        <div class="col-xs-3">
+        <div class="col-xs-6">
             <img src="img/jk.jpg" alt="" ng-click="select(2)" class="{{get_select(2)}}">
         </div>
-        <div class="col-xs-3">
+      </div>
+      <div class="row">
+        <div class="col-xs-6">
             <img src="img/ps.jpg" alt="" ng-click="select(3)" class="{{get_select(3)}}">
         </div>
-        <div class="col-xs-3">
+        <div class="col-xs-6">
             <img src="img/hj.jpg" alt="" ng-click="select(4)" class="{{get_select(4)}}">
         </div>
+      </div>
     </div>
 
     <ul class="list card">

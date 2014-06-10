@@ -110,6 +110,13 @@ angular.module('myApp.controllers', [])
          'ps': 'Prabowo Subianto',
          'hr': 'Hatta Rajasa',
       }
+      // $scope.data_knob = 30;
+      $scope.knobOptions = {
+         'width': 50,
+         'height': 60,
+         'displayInput': false,
+         'fgColor':"#444444"
+      };
       $scope.select = function(id) {
          if ($scope.aktif == 0) {
             $scope.aktif = id;
@@ -129,6 +136,9 @@ angular.module('myApp.controllers', [])
          }
       }
       $scope.socket = io.connect('http://cakpres.suitdev.com:3000/', {'force new connection': true});
+      
+      $scope.socket.emit('request');
+
       $scope.socket.on('soal', function (data) {
          console.log(data);
          $scope.soal = data.soal;

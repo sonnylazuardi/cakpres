@@ -3,7 +3,7 @@
 // Declare app level module which depends on filters, and services
 angular.module('myApp',
       ['myApp.config', 'myApp.routes', 'myApp.filters', 'myApp.services', 'myApp.directives', 'myApp.controllers',
-         'waitForAuth', 'routeSecurity', 'highcharts-ng', 'ui.gravatar', 'ngSanitize', 'QuickList']
+         'waitForAuth', 'routeSecurity', 'highcharts-ng', 'ui.gravatar', 'ngSanitize', 'QuickList', 'ui.knob']
    )
 
    .run(function(loginService, $rootScope, FBURL, $http) {

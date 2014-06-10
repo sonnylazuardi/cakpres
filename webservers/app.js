@@ -113,6 +113,9 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 var io = require('socket.io').listen(server);
 
 io.sockets.on('connection', function (socket) {
+    socket.on('request', function() {
+        socket.emit('soal', {soal: soal, counter: counter});
+    });
     socket.on('jawab', function (data) {
         // var user = _.findWhere(users, {nama: socket.nama});
         if (calon_set[idcalon] == data.jawab) {
