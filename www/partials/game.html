@@ -9,8 +9,11 @@
           {{soal}}
         </div>    
       </div>
-      <div class="col-lg-3">
+      <div class="col-lg-2">
         {{counter}}
+      </div>
+      <div class="col-lg-1">
+        {{user.score}}
       </div>
     </div>
     <div class="row calon">
@@ -29,20 +32,12 @@
     </div>
 
     <ul class="list card">
-      <div class="item item-avatar">
-        <img src="http://www.gravatar.com/avatar/0cf15665a9146ba852bf042b0652780a">
-        <h2>Marty McFly</h2>
-        <p>November 05, 1955</p>
-      </div>
-      <div class="item item-avatar">
-        <img src="http://www.gravatar.com/avatar/0cf15665a9146ba852bf042b0652780a">
-        <h2>Marty McFly</h2>
-        <p>November 05, 1955</p>
-      </div>
-      <div class="item item-avatar">
-        <img src="http://www.gravatar.com/avatar/0cf15665a9146ba852bf042b0652780a">
-        <h2>Marty McFly</h2>
-        <p>November 05, 1955</p>
+      <div class="item item-avatar" ng-repeat="answer in answers">
+        <img gravatar-src="answer.email" gravatar-size="150">
+        <h2>{{answer.name}}</h2>
+        <p ng-show="$index == 0">menjawab dengan benar (+10)</p>
+        <p ng-show="$index == 1">menjawab {{calon_nama[correct_answer]}} dan benar (+4)</p>
+        <p ng-show="$index > 1">menjawab {{calon_nama[correct_answer]}} dan benar (+1)</p>
       </div>
     </ul>
     

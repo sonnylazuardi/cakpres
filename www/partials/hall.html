@@ -1,0 +1,17 @@
+<div class="bar bar-header bar-dark">
+  <h1 class="title">Hall of Fame</h1>
+</div>
+
+<div class="content scroll-content has-header padding">
+
+  <ul class="list card">
+    <div class="item item-avatar" ng-repeat="user in halls| orderBy:'-score'">
+      <img gravatar-src="user.email" gravatar-size="150">
+      <h2>{{user.name}}</h2>
+      <p>Score: {{user.score}}</p>
+    </div>
+  </ul>
+    
+</div>
+
+<div ng-include src="'partials/footer.html'"></div>
