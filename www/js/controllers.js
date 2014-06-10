@@ -79,19 +79,42 @@ angular.module('myApp.controllers', [])
       }
    })
    
+   .controller('HallCtrl', function($scope, $http, syncData) {
+      // syncData('users').$bind($scope, 'users');
+      var sync = syncData('users');//.$bind($scope, 'users');
+      $scope.users = null;
+      $scope.keys = null;
+      $scope.halls = [];
+      sync.$on('loaded', function() {
+         $scope.users = sync;
+         $scope.keys = $scope.users.$getIndex();
+         for(var i = 0; i < $scope.keys.length; i++) {
+            $scope.halls.push($scope.users[$scope.keys[i]]);
+         }
+      });
+   })
+
    .controller('GameCtrl', function($scope, $http, syncData) {
       syncData(['users', $scope.auth.user.uid]).$bind($scope, 'user');
+      syncData('answers').$bind($scope, 'answers');
       $scope.calon_set = ['', 'jw', 'jk', 'ps', 'hr'];
       $scope.aktif = 0;
       $scope.benar = -1;
       $scope.salah = -1;
       $scope.soal = '';
       $scope.counter = 8;
+      $scope.correct_answer = '';
+      $scope.calon_nama = {
+         'jw': 'Joko Widodo',
+         'jk': 'Jusuf Kalla',
+         'ps': 'Prabowo Subianto',
+         'hr': 'Hatta Rajasa',
+      }
       $scope.select = function(id) {
          if ($scope.aktif == 0) {
             $scope.aktif = id;
             console.log($scope.auth.user.uid);
-            $scope.socket.emit('jawab', {jawab: $scope.calon_set[$scope.aktif], email: $scope.user.email, id: $scope.auth.user.uid});
+            $scope.socket.emit('jawab', {jawab: $scope.calon_set[$scope.aktif], email: $scope.user.email, user_id: $scope.auth.user.uid});
          }
       }
       $scope.get_select = function(id) {
@@ -123,6 +146,7 @@ angular.module('myApp.controllers', [])
          } else {
             $scope.salah = aktif;
          }
+         $scope.correct_answer = data.answer;
          $scope.$apply();
       });
 

@@ -4,7 +4,6 @@ var path = require('path');
 var _ = require('underscore');
 var request = require('request');
 var Firebase = require('firebase');
-var ref = new Firebase('https://cakpres.firebaseio.com/');
 
 var app = express();
 
@@ -18,10 +17,6 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
-
-var users = [];
-var onlineUsers = [];
-var answerers = {};
 
 var candidate_json = {};
 
@@ -121,34 +116,32 @@ io.sockets.on('connection', function (socket) {
     socket.on('jawab', function (data) {
         // var user = _.findWhere(users, {nama: socket.nama});
         if (calon_set[idcalon] == data.jawab) {
-            // if (user && answerPosition <= 5 && !answerers[socket.nama]) {
-                // answerers[socket.nama] = true;
-                // if (answerPosition == 1)
-                //     user.score += 10;
-                // else if (answerPosition == 2)
-                //     user.score += 4;
-                // else
-                //     user.score += 1;
-                // socket.emit('hasil', {status:true, score:user.score});
-                // // users.sort(function(n){ return n.score * -1; });
-                // io.sockets.emit('updateUsers', {users: users, online: makeOnline(), counter: counter});
-                // io.sockets.emit('updateWinner', {user: socket.nama, position: answerPosition});
-                // socket.emit('updateMe', {score: myScore(), position: answerPosition});
-                // answerPosition++;
-            // }
-            socket.emit('hasil', {status: true});
+            if (answerPosition <= 5) {
+                var ref = new Firebase('https://cakpres.firebaseio.com/users/'+data.user_id+'/');
+                ref.once('value', function(snapshot) {
+                    var user = snapshot.val();
+                    if (user !== null) {
+                        var cur_score = parseInt(user.score);
+                        if (answerPosition == 1)
+                            cur_score += 10;
+                        else if (answerPosition == 2)
+                            cur_score += 4;
+                        else
+                            cur_score += 1;
+                        ref.update({score: cur_score});
+                        socket.emit('hasil', {status: true});
+
+                        var answer = new Firebase('https://cakpres.firebaseio.com/answers/'+answerPosition+'/');
+                        answer.set(user);
+                        answerPosition++;
+                    }
+                });
+            }
         } else {
-            // if (user) {
-            //     socket.emit('hasil', {status:false, score: user.score});
-            // }
             socket.emit('hasil', {status: false});
         }
     });
     socket.on('disconnect', function () {
-        // var index = onlineUsers.indexOf(socket.nama);
-        // onlineUsers.splice(index, 1);
-        // io.sockets.emit('updateChat', {nama: socket.nama, message: socket.nama + ' terputus'});
-        // io.sockets.emit('updateUsers', {users: users, online: makeOnline(), counter: counter});
     });
 });
 
@@ -164,13 +157,13 @@ function timer() {
         if (counter < 0) {
             var hasil = candidate_json;
             if (hasil.data) {
-                idcalon = Math.floor((Math.random()*calon_set.length-1));
-                idjenis = Math.floor((Math.random()*jenis_set.length-1));
+                idcalon = Math.floor((Math.random()*calon_set.length-1)+1);
+                idjenis = Math.floor((Math.random()*jenis_set.length-1)+1);
                 var calon = _.findWhere(hasil.data.results.caleg, {id: calon_set[idcalon]});
                 console.log(calon.nama);
                 console.log(jenis_set[idjenis].name);
                 if (jenis_set[idjenis].category == 1) {
-                    idpertanyaan = Math.floor((Math.random()*calon[jenis_set[idjenis].name].length-1));
+                    idpertanyaan = Math.floor((Math.random()*calon[jenis_set[idjenis].name].length-1)+1);
                     soal = calon[jenis_set[idjenis].name][idpertanyaan][jenis_set[idjenis].field];
                     console.log(soal);
                 } else if (jenis_set[idjenis].category == 2) {
@@ -184,7 +177,10 @@ function timer() {
             }
             counter = 8;
             answerPosition = 1;
-            answerers = {};
+            for (var i = 1; i <= 5; i++) {
+                var del = new Firebase('https://cakpres.firebaseio.com/answers/'+i+'/');
+                del.remove();
+            };
             io.sockets.emit('soal', {soal: soal, counter: counter});
         }
         timer();
