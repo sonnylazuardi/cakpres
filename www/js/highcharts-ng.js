@@ -74,14 +74,26 @@ angular.module('highcharts-ng', [])
 
       var defaultOptions = {
         chart: {
+          backgroundColor: '#ff9500',
           events: {}
         },
-        title: {},
-        subtitle: {},
+        title: {
+          text: 'Loading. . .'
+        },
         series: [],
         credits: {},
-        plotOptions: {},
-        navigator: {enabled: false}
+        plotOptions: {
+          pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+              enabled: true,
+              color: '#FFFFFF',
+              connectorColor: '#FFFFFF',
+            }
+          },
+          navigator: {enabled: false}
+        }
       };
 
       if (config.options) {

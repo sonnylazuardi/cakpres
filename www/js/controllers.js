@@ -241,10 +241,10 @@ angular.module('myApp.controllers', [])
       console.log(filterFilter($scope.violations,'pdi'));
       $scope.chartConfig = {
          chart: {
-            backgroundColor:'#FF9500',
+           
          },
          title: {
-            text: 'Browser market shares at a specific website, 2014'
+            text: ''
          },
          tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -255,13 +255,14 @@ angular.module('myApp.controllers', [])
                cursor: 'pointer',
                dataLabels: {
                   enabled: true,
-                  format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                  style: {
-                     color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                  color: '#FFFFFF',
+                  connectorColor: '#FFFFFF',
+                  formatter: function () {
+                     return '<b>' + this.point.name + '</b>: ' + this.percentage + ' %';
                   }
                }
             }
-         },
+        },
          series: [{
             type: 'pie',
             name: 'overall',
@@ -276,10 +277,10 @@ angular.module('myApp.controllers', [])
                }
             },
             data: [
-               {name: 'Joko Widodo', y: filterFilter($scope.violations,'pdi').length, url: '#/violation/jokowi'},
-               {name: 'Prabowo Subianto', y: filterFilter($scope.violations,'gerindra').length, url: '#/violation/prabowo'},
-               {name: 'Hatta Rajasa', y: filterFilter($scope.violations,'amanat nasional').length, url: '#/violation/hatta'},
-               {name: 'Jusuf Kalla', y: filterFilter($scope.violations,'golkar').length, url: '#/violation/jusuf'}
+               {name: 'Joko Widodo', y: filterFilter($scope.violations,'pdi').length, color:'#f42539', url: '#/violation/jokowi'},
+               {name: 'Prabowo Subianto', y: filterFilter($scope.violations,'gerindra').length, color:'#4cfd69', url: '#/violation/prabowo'},
+               {name: 'Hatta Rajasa', y: filterFilter($scope.violations,'amanat nasional').length, color:'#974cfd', url: '#/violation/hatta'},
+               {name: 'Jusuf Kalla', y: filterFilter($scope.violations,'golkar').length, color:'#f9fc20', url: '#/violation/jusuf'}
             ]
          }]
       }    
