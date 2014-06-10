@@ -122,6 +122,10 @@ input, textarea {
   margin-right: 0px; 
 }
 
+.knob-pos canvas {
+  float: right;
+}
+
 @media (min-width: 450px) {
   
   .calon {
@@ -139,5 +143,3 @@ input, textarea {
   }
 
 }
-
-

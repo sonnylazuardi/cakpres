@@ -110,6 +110,13 @@ angular.module('myApp.controllers', [])
          'ps': 'Prabowo Subianto',
          'hr': 'Hatta Rajasa',
       }
+      // $scope.data_knob = 30;
+      $scope.knobOptions = {
+         'width': 50,
+         'height': 60,
+         'displayInput': false,
+         'fgColor':"#222222"
+      };
       $scope.select = function(id) {
          if ($scope.aktif == 0) {
             $scope.aktif = id;
