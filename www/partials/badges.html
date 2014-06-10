@@ -1,0 +1,14 @@
+<div class="bar bar-header bar-dark">
+  <h1 class="title">Cakpres Game</h1>
+</div>
+
+<div class="content scroll-content has-header padding">
+	<h2>Daftar Badge ({{count}})</h2>
+	<div class="card" ng-repeat="badge in badgesArr track by $index">
+	  <div class="item item-text-wrap">
+		<img src="{{badge}}"/> {{$index + 1}}. Mencapai skor {{scoreArr[$index]}}.
+	  </div>
+	</div>
+</div>
+
+<div ng-include src="'partials/footer.html'"></div>

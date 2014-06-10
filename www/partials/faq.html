@@ -2,17 +2,17 @@
   <h1 class="title">Cakpres Game</h1>
 </div>
 
-<div class="content has-header padding">
+<div class="content has-header padding scroll-content">
 	<h2>FAQ</h2>
-
-	<p class="status good" ng-show-auth="login">Hello! You are logged in.</p>
-	<p class="status" ng-show-auth="logout">Not logged in</p>
-	<p class="status error" ng-show-auth="error">{{auth.error}}</p>
-
-	<input ng-model="syncedValue" type="text" /> <b>{{syncedValue}}</b>
-
-	<p>Open <a href="{{FBURL}}/syncedValue">Forge</a> or a <a target="_blank" href="index.html">new window</a> to see this input update in real time:</p>
-
+	Search: <input ng-model="query">
+	<div class="card" ng-repeat="question in questions | filter:query">
+		<div class="item item-divider">
+    		{{question.question}}
+  		</div>
+		<div class="item item-text-wrap">
+		  {{question.answer}}
+		</div>
+	</div>
 </div>
 
 <div ng-include src="'partials/footer.html'"></div>

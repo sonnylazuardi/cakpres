@@ -32,6 +32,12 @@ angular.module('myApp.routes', ['ngRoute'])
          controller: 'GameCtrl'
       });
 	  
+	  $routeProvider.when('/badges', {
+         authRequired: true,
+         templateUrl: 'partials/badges.html',
+         controller: 'BadgesCtrl'
+      });
+	  
 	  $routeProvider.when('/help', {
          authRequired: false,
          templateUrl: 'partials/help.html',
