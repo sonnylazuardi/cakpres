@@ -3,59 +3,48 @@
 </div>
 
 <div class="content scroll-content has-header padding">
-    <div class="soal">
-        Nama Pasangan: Hj. Iriana, SE., MM.
+    <div class="row">
+      <div class="col-lg-9">
+        <div class="soal">
+          {{soal}}
+        </div>    
+      </div>
+      <div class="col-lg-3">
+        {{counter}}
+      </div>
     </div>
-
     <div class="row calon">
         <div class="col-lg-3">
-            <img src="img/jw.jpg" alt="">
+            <img src="img/jw.jpg" alt="" ng-click="select(1)" class="{{get_select(1)}}">
         </div>
         <div class="col-lg-3">
-            <img src="img/jk.jpg" alt="">
+            <img src="img/jk.jpg" alt="" ng-click="select(2)" class="{{get_select(2)}}">
         </div>
         <div class="col-lg-3">
-            <img src="img/ps.jpg" alt="">
+            <img src="img/ps.jpg" alt="" ng-click="select(3)" class="{{get_select(3)}}">
         </div>
         <div class="col-lg-3">
-            <img src="img/hj.jpg" alt="">
+            <img src="img/hj.jpg" alt="" ng-click="select(4)" class="{{get_select(4)}}">
         </div>
     </div>
 
-    <ul class="list">
-
-        <li class="item">
-          Battletoads
-        </li>
-        <li class="item">
-          Contra
-        </li>
-        <li class="item">
-          Duck Tales
-        </li>
-        <li class="item">
-          Mega Man
-        </li>
-        <li class="item">
-          Metroid
-        </li>
-        <li class="item">
-          Mike Tyson's Punch-Out
-        </li>
-        <li class="item">
-          R.C. Pro-Am
-        </li>
-        <li class="item">
-          Spy Hunter
-        </li>
-        <li class="item">
-          Super Mario Bros.
-        </li>
-        <li class="item">
-          The Legend of Zelda
-        </li>
-
-      </ul>
+    <ul class="list card">
+      <div class="item item-avatar">
+        <img src="http://www.gravatar.com/avatar/0cf15665a9146ba852bf042b0652780a">
+        <h2>Marty McFly</h2>
+        <p>November 05, 1955</p>
+      </div>
+      <div class="item item-avatar">
+        <img src="http://www.gravatar.com/avatar/0cf15665a9146ba852bf042b0652780a">
+        <h2>Marty McFly</h2>
+        <p>November 05, 1955</p>
+      </div>
+      <div class="item item-avatar">
+        <img src="http://www.gravatar.com/avatar/0cf15665a9146ba852bf042b0652780a">
+        <h2>Marty McFly</h2>
+        <p>November 05, 1955</p>
+      </div>
+    </ul>
     
 
 </div>
