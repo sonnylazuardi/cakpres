@@ -6,7 +6,7 @@ angular.module('myApp',
          'waitForAuth', 'routeSecurity', 'highcharts-ng', 'ui.gravatar', 'ngSanitize']
    )
 
-   .run(['loginService', '$rootScope', 'FBURL', function(loginService, $rootScope, FBURL) {
+   .run(function(loginService, $rootScope, FBURL, $http) {
       if( FBURL === 'https://INSTANCE.firebaseio.com' ) {
          // double-check that the app has been configured
          angular.element(document.body).html('<h1>Please configure app/js/config.js before running!</h1>');
@@ -22,5 +22,12 @@ angular.module('myApp',
          $rootScope.$back = function() { 
             window.history.back();
          };
+
+         $rootScope.violations = {};
+
+         $http.get('http://api.pemiluapi.org/laporan_pelanggaran/api/reports?apiKey=fea6f7d9ec0b31e256a673114792cb17').success(function(data) {
+            console.log(data);
+            $rootScope.violations = data;
+         });
       }
-   }]);
+   });

@@ -218,10 +218,14 @@ angular.module('myApp.controllers', [])
       });
    })
 
-   .controller('ViolationCtrl', function($scope, $http, $routeParams) {
-      $http.get('http://api.pemiluapi.org/laporan_pelanggaran/api/reports?apiKey=fea6f7d9ec0b31e256a673114792cb17').success(function(data) {
-         console.log(data);
-         $scope.violations = data['data']['results']['reports'];
+   .controller('ViolationCtrl', function($scope, $http, $routeParams, $rootScope) {
+      // $scope.violations = {data:{results:{reports:null}}};
+      // $http.get('http://api.pemiluapi.org/laporan_pelanggaran/api/reports?apiKey=fea6f7d9ec0b31e256a673114792cb17').success(function(data) {
+      //    console.log(data);
+      //    $scope.violations = data;
+      // });
+      // if ($rootScope.violations['data']) {
+         // $scope.violations = $rootScope.violations['data']['results']['reports'];
          if ($routeParams.id == 'jokowi') { 
             $scope.filter = 'pdi';
             $scope.subject = 'Joko Widodo';
@@ -236,13 +240,14 @@ angular.module('myApp.controllers', [])
             $scope.subject = 'Hatta Rajasa';
          } else
             $scope.filter = '';
-      });
+      // }
+      // });
    })
 
-   .controller('ViolationCategoryCtrl', function($scope, filterFilter, $http) {
-      $http.get('http://api.pemiluapi.org/laporan_pelanggaran/api/reports?apiKey=fea6f7d9ec0b31e256a673114792cb17').success(function(data) {
-      console.log(data);
-      $scope.violations = data['data']['results']['reports'];
+   .controller('ViolationCategoryCtrl', function($scope, filterFilter, $http, $rootScope) {
+      // $http.get('http://api.pemiluapi.org/laporan_pelanggaran/api/reports?apiKey=fea6f7d9ec0b31e256a673114792cb17').success(function(data) {
+      // console.log(data);
+      $scope.violations = $rootScope.violations['data']['results']['reports'];
       console.log(filterFilter($scope.violations,'pdi'));
       $scope.chartConfig = {
          chart: {
@@ -288,7 +293,7 @@ angular.module('myApp.controllers', [])
             ]
          }]
       }    
-      });
+      // });
    })
 
     .controller('FaqCtrl', function($scope, $http) {
