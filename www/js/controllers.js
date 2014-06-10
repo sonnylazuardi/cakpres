@@ -243,8 +243,7 @@ angular.module('myApp.controllers', [])
     .controller('FaqCtrl', function($scope, $http) {
       $http.get('http://api.pemiluapi.org/faq-presiden/api/questions?apiKey=fea6f7d9ec0b31e256a673114792cb17').success(function(data) {
          console.log(data);         
-         $scope.badges = data['data']['results']['stamps'];
-		 
+         $scope.questions = data['data']['results']['questions'];
       });
    })
 

@@ -19,6 +19,8 @@ angular.module('myApp',
          $rootScope.auth = loginService.init('/login');
          $rootScope.FBURL = FBURL;
 
-         $rootScope
+         $rootScope.$back = function() { 
+            window.history.back();
+         };
       }
    }]);

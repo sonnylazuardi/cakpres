@@ -1,10 +1,16 @@
 <div class="bar bar-header bar-dark">
-  <h1 class="title">Cakpres Game</h1>
+  <h1 class="title">FAQ</h1>
 </div>
 
 <div class="content has-header padding scroll-content">
-	<h2>FAQ</h2>
-	Search: <input ng-model="query">
+
+	<div class="list list-inset">
+		<label class="item item-input">
+		<i class="icon ion-search placeholder-icon"></i>
+		<input type="text" placeholder="Cari Pertanyaan" ng-model="query">
+		</label>
+	</div>
+
 	<div class="card" ng-repeat="question in questions | filter:query">
 		<div class="item item-divider">
     		{{question.question}}

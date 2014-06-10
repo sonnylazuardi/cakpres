@@ -107,3 +107,7 @@ a.tab-item:hover {
   border: 5px solid #fea683;
   box-shadow: 0px 0px 50px #fea683;
 }
+
+input, textarea {
+  color: #000;
+}
