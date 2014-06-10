@@ -80,7 +80,6 @@ a.tab-item:hover {
 .soal {
   font-size: 2em;
   line-height: 1.2em;
-  padding: 20px 10px;
 }
 
 .card h2{
@@ -117,3 +116,28 @@ input, textarea {
   text-overflow: ellipsis;
   white-space: normal; 
 }
+
+.row {
+  margin-left: 0px; 
+  margin-right: 0px; 
+}
+
+@media (min-width: 450px) {
+  
+  .calon {
+    width: 70%;
+    margin: 0 auto;
+  }
+
+}
+
+@media (min-width: 960px) {
+  
+  .calon {
+    width: 30%;
+    margin: 0 auto;
+  }
+
+}
+
+
