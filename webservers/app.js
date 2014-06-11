@@ -4,6 +4,7 @@ var path = require('path');
 var _ = require('underscore');
 var request = require('request');
 var Firebase = require('firebase');
+var api_key = 'fbc6b82380c5619ee9d2a648e400b614';
 
 var app = express();
 
@@ -98,7 +99,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/api/refresh', function(req, res) {
-    request("http://api.pemiluapi.org/calonpresiden/api/caleg?apiKey=fea6f7d9ec0b31e256a673114792cb17", function(error, response, body) {
+    request("http://api.pemiluapi.org/calonpresiden/api/caleg?apiKey="+api_key, function(error, response, body) {
       candidate_json = JSON.parse(body);
       res.send('ok!');
     });
@@ -132,7 +133,7 @@ io.sockets.on('connection', function (socket) {
                         else
                             cur_score += 1;
                         ref.update({score: cur_score});
-                        socket.emit('hasil', {status: true});
+                        socket.emit('hasil', {status: true, answer: calon_set[idcalon]});
 
                         var answer = new Firebase('https://cakpres.firebaseio.com/answers/'+answerPosition+'/');
                         answer.set(user);
@@ -141,14 +142,14 @@ io.sockets.on('connection', function (socket) {
                 });
             }
         } else {
-            socket.emit('hasil', {status: false});
+            socket.emit('hasil', {status: false, answer: calon_set[idcalon]});
         }
     });
     socket.on('disconnect', function () {
     });
 });
 
-request("http://api.pemiluapi.org/calonpresiden/api/caleg?apiKey=fea6f7d9ec0b31e256a673114792cb17", function(error, response, body) {
+request("http://api.pemiluapi.org/calonpresiden/api/caleg?apiKey="+api_key, function(error, response, body) {
     candidate_json = JSON.parse(body);
 });
 
@@ -180,10 +181,8 @@ function timer() {
             }
             counter = 8;
             answerPosition = 1;
-            for (var i = 1; i <= 5; i++) {
-                var del = new Firebase('https://cakpres.firebaseio.com/answers/'+i+'/');
-                del.remove();
-            };
+            var del = new Firebase('https://cakpres.firebaseio.com/answers/');
+            del.remove();
             io.sockets.emit('soal', {soal: soal, counter: counter});
         }
         timer();
