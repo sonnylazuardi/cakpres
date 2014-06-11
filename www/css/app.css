@@ -127,7 +127,7 @@ input, textarea {
   float: right;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1024px) {
   
   .calon {
     width: 30%;
