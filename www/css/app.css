@@ -127,16 +127,7 @@ input, textarea {
   float: right;
 }
 
-@media (min-width: 450px) {
-  
-  .calon {
-    width: 70%;
-    margin: 0 auto;
-  }
-
-}
-
-@media (min-width: 960px) {
+@media (min-width: 1200px) {
   
   .calon {
     width: 30%;
