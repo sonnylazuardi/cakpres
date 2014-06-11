@@ -58,7 +58,7 @@ angular.module('myApp.controllers', [])
                   // must be logged in before I can write to my profile
                   $scope.login(function() {
                      loginService.createProfile(user.uid, user.email);
-                     $location.path('/account');
+                     $location.path('/game');
                   });
                }
             });

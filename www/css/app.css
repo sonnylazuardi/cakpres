@@ -65,8 +65,9 @@ a.tab-item:hover {
 
 .logo {
   background: url('../img/cakpres.png') no-repeat;
-  width: 250px;
-  height: 259px;
+  /*background-size: cover;*/
+  width: 200px;
+  height: 209px;
   margin: 20px auto;
 
 }

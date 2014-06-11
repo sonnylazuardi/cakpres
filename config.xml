@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.ionicframework.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>StarterApp</name>
+<widget id="com.suitmedia.cakpres" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Cakpres</name>
     <description>
-        A sample Ionic Framework app using Cordova and AngularJS
+        A multiplayer pemilu game
     </description>
-    <author email="support@drifty.com" href="http://ionicframework.com/">
-        Ionic Framework Team
+    <author email="sonnylazuardi@gmail.com" href="http://sonnylab.com/">
+        Suit Team
     </author>
     <content src="index.html" />
     <access origin="*" />
