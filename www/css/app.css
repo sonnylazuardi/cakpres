@@ -135,3 +135,12 @@ input, textarea {
   }
 
 }
+
+@media (min-width: 1280px) {
+  
+  .calon {
+    width: 30%;
+    margin: 0 auto;
+  }
+
+}
