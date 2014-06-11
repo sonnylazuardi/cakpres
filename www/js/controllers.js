@@ -42,6 +42,7 @@ angular.module('myApp.controllers', [])
                $scope.err = err? err + '' : null;
                if( !err ) {
                   cb && cb(user);
+                  $location.path('/game');
                }
             });
          }
