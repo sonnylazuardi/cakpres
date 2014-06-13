@@ -1,6 +1,6 @@
 <div class="bar bar-header bar-dark">
   <button class="button icon ion-chevron-left" ng-click="$back()"></button> 
-  <h1 class="title">Peringkat</h1>
+  <h1 class="title">Peringkat ({{halls.length}} pemain)</h1>
 </div>
 
 <div class="content scroll-content has-header padding">
@@ -8,7 +8,7 @@
   <ul class="list card">
     <div class="item item-avatar" ng-repeat="user in halls| orderBy:'-score'">
       <img gravatar-src="user.email" gravatar-size="150">
-      <h2>{{user.name}}</h2>
+      <h2>{{$index+1}}. {{user.name}}</h2>
       <p>Score: {{user.score}}</p>
     </div>
   </ul>
