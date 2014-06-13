@@ -4,9 +4,16 @@
 </div>
 
 <div class="content scroll-content has-header padding">
+  
+  <div class="list list-inset">
+    <label class="item item-input">
+    <i class="icon ion-search placeholder-icon"></i>
+    <input type="text" placeholder="Cari Pemain" ng-model="query">
+    </label>
+  </div>
 
   <ul class="list card">
-    <div class="item item-avatar" ng-repeat="user in halls| orderBy:'-score'">
+    <div class="item item-avatar" ng-repeat="user in halls| orderBy:'-score' | filter:query">
       <img gravatar-src="user.email" gravatar-size="150">
       <h2>{{$index+1}}. {{user.name}}</h2>
       <p>Score: {{user.score}}</p>
