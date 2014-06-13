@@ -90,7 +90,8 @@ angular.module('myApp.controllers', [])
          $scope.users = sync;
          $scope.keys = $scope.users.$getIndex();
          for(var i = 0; i < $scope.keys.length; i++) {
-            $scope.halls.push($scope.users[$scope.keys[i]]);
+            var user = $scope.users[$scope.keys[i]];
+            $scope.halls.push(user);
          }
       });
    })
