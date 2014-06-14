@@ -9,7 +9,7 @@
 	<div class="list card">
 		<div class="item item-avatar" ng-repeat="badge in badgesArr track by $index">
 	      <img src="{{badge}}"/>
-	      <h2>Penghargaan #{{$index + 1}}</h2>
+	      <h2>Badge #{{$index + 1}}: {{badgesName[$index]}}</h2>
 	      <p>Mencapai skor {{scoreArr[$index]}}</p>
 	    </div>
 	</div>

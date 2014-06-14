@@ -187,7 +187,8 @@ angular.module('myApp.controllers', [])
                $scope.score = $scope.user.score;
 
                var scoreArr = [100,500,2000,6000, 10000, 20000, 30000, 50000, 70000, 100000];
-               var badgesArr = [];
+			   var badgesName = [];
+			   var badgesArr = [];
                var badgesCount = 0;
 
                //console.log($scope.score);
@@ -208,12 +209,14 @@ angular.module('myApp.controllers', [])
                   if(count < badgesCount){
                      //console.log("pushed");
                      badgesArr.push(stamp['url_small']);
-                     count++;
+                     badgesName.push(stamp['text']);
+					 count++;
                   }
                });
 
-               console.log(badgesArr);
-
+               //console.log(badgesArr);
+				
+			   $scope.badgesName = badgesName;
                $scope.count = badgesCount;
                $scope.badgesArr = badgesArr;
                $scope.scoreArr = scoreArr;
