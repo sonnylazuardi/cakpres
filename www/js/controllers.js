@@ -96,7 +96,7 @@ angular.module('myApp.controllers', [])
       });
    })
 
-   .controller('GameCtrl', function($scope, $http, syncData) {
+   .controller('GameCtrl', function($scope, $http, syncData, ngAudio) {
       syncData(['users', $scope.auth.user.uid]).$bind($scope, 'user');
       syncData('answers').$bind($scope, 'answers');
       $scope.calon_set = ['', 'jw', 'jk', 'ps', 'hr'];
@@ -106,6 +106,9 @@ angular.module('myApp.controllers', [])
       $scope.soal = '';
       $scope.counter = 8;
       $scope.correct_answer = '';
+	  
+	  //console.log(ngAudio);
+	  
       $scope.calon_nama = {
          'jw': 'Joko Widodo',
          'jk': 'Jusuf Kalla',
@@ -126,6 +129,7 @@ angular.module('myApp.controllers', [])
             $scope.socket.emit('jawab', {jawab: $scope.calon_set[$scope.aktif], email: $scope.user.email, user_id: $scope.auth.user.uid});
          }
       }
+	  
       $scope.get_select = function(id) {
          if (id == $scope.benar) {
             return 'benar';
@@ -137,6 +141,7 @@ angular.module('myApp.controllers', [])
             return 'aktif';
          }
       }
+	  
       $scope.socket = io.connect('http://cakpres.suitdev.com:3000/', {'force new connection': true});
 
       $scope.socket.emit('request');
@@ -150,13 +155,16 @@ angular.module('myApp.controllers', [])
          $scope.salah = -1;
          $scope.$apply();
       });
-
+	  
       $scope.socket.on('hasil', function (data) {
          var aktif = $scope.aktif;
-         if (data.status) {
-            $scope.benar = aktif;
+         
+		 if (data.status) {
+			ngAudio.play('clicktrue');
+			$scope.benar = aktif;
          } else {
-            $scope.salah = aktif;
+			ngAudio.play('clickfalse');
+			$scope.salah = aktif;
          }
          $scope.correct_answer = data.answer;
          $scope.$apply();
