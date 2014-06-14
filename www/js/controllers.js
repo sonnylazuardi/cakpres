@@ -321,7 +321,8 @@ angular.module('myApp.controllers', [])
 
    .controller('FaqCtrl', function($scope, $http, Faq) {
       Faq.getData().then(function(data) {
-         $scope.questions = data['data']['results']['questions'];   
+	  console.log(data);
+         $scope.questions = data;   
       });
    })
 
