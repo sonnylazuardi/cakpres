@@ -65,8 +65,9 @@ a.tab-item:hover {
 
 .logo {
   background: url('../img/cakpres.png') no-repeat;
-  width: 250px;
-  height: 259px;
+  /*background-size: cover;*/
+  width: 200px;
+  height: 209px;
   margin: 20px auto;
 
 }
@@ -126,16 +127,16 @@ input, textarea {
   float: right;
 }
 
-@media (min-width: 450px) {
+@media (min-width: 1024px) {
   
   .calon {
-    width: 70%;
+    width: 30%;
     margin: 0 auto;
   }
 
 }
 
-@media (min-width: 960px) {
+@media (min-width: 1280px) {
   
   .calon {
     width: 30%;

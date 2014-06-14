@@ -5,12 +5,12 @@
 
    	angular.module('myApp.services', ['myApp.service.login', 'myApp.service.firebase'])
    	
-   	.factory('Violation', function($http, $q) {
+   	.factory('Violation', function($http, $q, API_KEY) {
    		var my_data = null;
 	    var getData = function() {
 	    	if (my_data == null) {
 		        var deferred = $q.defer();
-		        $http({method:"GET", url:"http://api.pemiluapi.org/laporan_pelanggaran/api/reports?apiKey=fea6f7d9ec0b31e256a673114792cb17"}).success(function(result){
+		        $http({method:"GET", url:"http://api.pemiluapi.org/laporan_pelanggaran/api/reports?apiKey="+API_KEY}).success(function(result){
 		        	my_data = result;
 		            deferred.resolve(result);
 		        });
@@ -26,12 +26,12 @@
 	    };
 	})
 
-   	.factory('Faq', function($http, $q) {
+   	.factory('Faq', function($http, $q, API_KEY) {
    		var my_data = null;
 	    var getData = function() {
 	    	if (my_data == null) {
 		        var deferred = $q.defer();
-		        $http({method:"GET", url:"http://api.pemiluapi.org/faq-presiden/api/questions?apiKey=fea6f7d9ec0b31e256a673114792cb17"}).success(function(result){
+		        $http({method:"GET", url:"http://api.pemiluapi.org/faq-presiden/api/questions?apiKey="+API_KEY}).success(function(result){
 		        	my_data = result;
 		            deferred.resolve(result);
 		        });

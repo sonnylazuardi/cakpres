@@ -23,11 +23,5 @@ angular.module('myApp',
             window.history.back();
          };
 
-         // $rootScope.violations = {};
-
-         // $http.get('http://api.pemiluapi.org/laporan_pelanggaran/api/reports?apiKey=fea6f7d9ec0b31e256a673114792cb17').success(function(data) {
-         //    console.log(data);
-         //    $rootScope.violations = data;
-         // });
       }
    });

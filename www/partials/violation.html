@@ -18,7 +18,7 @@
 	<!-- ng-repeat="violation in violations['data']['results']['reports'] | filter:filter | filter:query" -->
 
 	<div class="card" 
-		quick-ng-repeat="violation in violations['data']['results']['reports'] | filter:filter | filter:query" quick-repeat-list="violations">
+		ng-repeat="violation in violations['data']['results']['reports'] | filter:filter | filter:query">
 	
 		<div class="item item-divider">
 			{{violation.judul_laporan}}

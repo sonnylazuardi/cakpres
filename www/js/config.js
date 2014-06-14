@@ -13,6 +13,9 @@ angular.module('myApp.config', [])
    // your Firebase URL goes here
    .constant('FBURL', 'https://cakpres.firebaseio.com')
 
+   // Pemilu API key
+   .constant('API_KEY', 'fbc6b82380c5619ee9d2a648e400b614')
+
    //you can use this one to try out a demo of the seed
 //   .constant('FBURL', 'https://angularfire-seed.firebaseio.com');
 

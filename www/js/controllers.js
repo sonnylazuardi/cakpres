@@ -42,6 +42,7 @@ angular.module('myApp.controllers', [])
                $scope.err = err? err + '' : null;
                if( !err ) {
                   cb && cb(user);
+                  $location.path('/game');
                }
             });
          }
@@ -58,7 +59,7 @@ angular.module('myApp.controllers', [])
                   // must be logged in before I can write to my profile
                   $scope.login(function() {
                      loginService.createProfile(user.uid, user.email);
-                     $location.path('/account');
+                     $location.path('/game');
                   });
                }
             });
@@ -89,7 +90,8 @@ angular.module('myApp.controllers', [])
          $scope.users = sync;
          $scope.keys = $scope.users.$getIndex();
          for(var i = 0; i < $scope.keys.length; i++) {
-            $scope.halls.push($scope.users[$scope.keys[i]]);
+            var user = $scope.users[$scope.keys[i]];
+            $scope.halls.push(user);
          }
       });
    })
@@ -136,7 +138,7 @@ angular.module('myApp.controllers', [])
          }
       }
       $scope.socket = io.connect('http://cakpres.suitdev.com:3000/', {'force new connection': true});
-      
+
       $scope.socket.emit('request');
 
       $scope.socket.on('soal', function (data) {
@@ -174,8 +176,8 @@ angular.module('myApp.controllers', [])
 
    })
    
-   .controller('BadgesCtrl', function($scope, syncData, $http) {
-      $http.get('http://api.pemiluapi.org/stamps/api/stamps?apiKey=fea6f7d9ec0b31e256a673114792cb17').success(function(data) {
+   .controller('BadgesCtrl', function($scope, syncData, $http, API_KEY) {
+      $http.get('http://api.pemiluapi.org/stamps/api/stamps?apiKey='+API_KEY).success(function(data) {
          $scope.score = 0;
          $scope.user = null;
          var sync = syncData(['users', $scope.auth.user.uid]);//.$bind($scope, 'user');
@@ -225,20 +227,13 @@ angular.module('myApp.controllers', [])
       });
    })
    
-   .controller('HelpCtrl', function($scope, $http) {
-      $http.get('http://api.pemiluapi.org/calonpresiden/api/caleg?apiKey=fea6f7d9ec0b31e256a673114792cb17').success(function(data) {
+   .controller('HelpCtrl', function($scope, $http, API_KEY) {
+      $http.get('http://api.pemiluapi.org/calonpresiden/api/caleg?apiKey='+API_KEY).success(function(data) {
          console.log(data);
       });
    })
 
    .controller('ViolationCtrl', function($scope, $http, $routeParams, Violation) {
-      // $scope.violations = {data:{results:{reports:null}}};
-      // $http.get('http://api.pemiluapi.org/laporan_pelanggaran/api/reports?apiKey=fea6f7d9ec0b31e256a673114792cb17').success(function(data) {
-      //    console.log(data);
-      //    $scope.violations = data;
-      // });
-      // if ($rootScope.violations['data']) {
-         // $scope.violations = $rootScope.violations['data']['results']['reports'];
          Violation.getData().then(function(violations) {
 
 
@@ -264,8 +259,6 @@ angular.module('myApp.controllers', [])
    })
 
    .controller('ViolationCategoryCtrl', function($scope, filterFilter, $http, Violation) {
-      // $http.get('http://api.pemiluapi.org/laporan_pelanggaran/api/reports?apiKey=fea6f7d9ec0b31e256a673114792cb17').success(function(data) {
-      // console.log(data);
       Violation.getData().then(function(violations) {
          $scope.violations = violations['data']['results']['reports'];
          console.log(filterFilter($scope.violations,'pdi'));
