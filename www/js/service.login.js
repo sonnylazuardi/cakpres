@@ -4,7 +4,16 @@ angular.module('myApp.service.login', ['firebase', 'myApp.service.firebase'])
    .factory('loginService', ['$rootScope', '$firebaseSimpleLogin', 'firebaseRef', 'profileCreator', '$timeout',
       function($rootScope, $firebaseSimpleLogin, firebaseRef, profileCreator, $timeout) {
          var auth = null;
+         var method = 'password';
          return {
+            setMethod: function(new_method) {
+               method = new_method;
+            },
+
+            getMethod: function(){
+               return method;
+            },
+
             init: function() {
                return auth = $firebaseSimpleLogin(firebaseRef());
             },
@@ -17,18 +26,38 @@ angular.module('myApp.service.login', ['firebase', 'myApp.service.firebase'])
              */
             login: function(email, pass, callback) {
                assertAuth();
-               auth.$login('password', {
-                  email: email,
-                  password: pass,
-                  rememberMe: true
-               }).then(function(user) {
-                     if( callback ) {
-                        //todo-bug https://github.com/firebase/angularFire/issues/199
+               if (method == 'password') {
+                  auth.$login('password', {
+                     email: email,
+                     password: pass,
+                     rememberMe: true
+                  }).then(function(user) {
+                        if( callback ) {
+                           //todo-bug https://github.com/firebase/angularFire/issues/199
+                           $timeout(function() {
+                              callback(null, user);
+                           });
+                        }
+                     }, callback);
+               } else if (method == 'facebook') {
+                  auth.$login('facebook').then(function(user){
+                     console.log(user);
+                     if (callback) {
                         $timeout(function() {
                            callback(null, user);
                         });
                      }
                   }, callback);
+               } else if (method == 'google') {
+                  auth.$login('google').then(function(user){
+                     console.log(user);
+                     if (callback) {
+                        $timeout(function() {
+                           callback(null, user);
+                        });
+                     }
+                  }, callback);
+               }
             },
 
             logout: function() {

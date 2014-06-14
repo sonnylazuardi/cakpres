@@ -23,13 +23,14 @@ angular.module('myApp.controllers', [])
       };
    })
 
-   .controller('LoginCtrl', function($scope, loginService, $location) {
+   .controller('LoginCtrl', function($scope, loginService, $location, syncData) {
       $scope.email = null;
       $scope.pass = null;
       $scope.confirm = null;
       $scope.createMode = false;
 
       $scope.login = function(cb) {
+         loginService.setMethod('password');
          $scope.err = null;
          if( !$scope.email ) {
             $scope.err = 'Please enter an email address';
@@ -46,6 +47,53 @@ angular.module('myApp.controllers', [])
                }
             });
          }
+      };
+
+      $scope.login_fb = function(cb) {
+         loginService.setMethod('facebook');
+         loginService.login(null, null, function(err, user) {
+            $scope.err = err? err + '' : null;
+            if (!err) {
+               var sync = syncData(['users', $scope.auth.user.uid]);
+               console.log(sync);
+               sync.$on('loaded', function() {
+                  if (!sync.name) {
+                     console.log(sync);
+                     sync.name = user.displayName;
+                     sync.email = user.email;
+                     sync.fbid = user.id;
+                     sync.score = 0;
+                     sync.$save();
+                  }
+               });
+               cb && cb(user);
+               $location.path('/game');
+            }
+         });
+      };
+
+      $scope.login_google = function(cb) {
+         loginService.setMethod('google');
+         loginService.login(null, null, function(err, user) {
+            $scope.err = err? err + '' : null;
+            if (!err) {
+               var sync = syncData(['users', $scope.auth.user.uid]);
+               console.log(sync);
+               sync.$on('loaded', function() {
+                  if (!sync.name) {
+                     console.log(sync);
+                     sync.name = user.displayName;
+                     sync.email = user.email;
+                     sync.googleid = user.id;
+                     sync.image = user.thirdPartyUserData.picture;
+                     sync.score = 0;
+                     sync.$save();
+                  }
+               });
+               cb && cb(user);
+               $location.path('/game');
+            }
+         });
       };
 
       $scope.createAccount = function() {
@@ -86,6 +134,12 @@ angular.module('myApp.controllers', [])
       $scope.users = null;
       $scope.keys = null;
       $scope.halls = [];
+      $scope.googleids = [];
+      $scope.google_profpic = function(id) {
+         $http.get('https://www.googleapis.com/plus/v1/people/'+id+'?fields=image&key=AIzaSyCCMKTENLL6lQD-bDl1ieojrE9IrcPAsfg').success(function(data) {
+            $scope.googleids[id] = data.image.url;
+         });
+      }
       sync.$on('loaded', function() {
          $scope.users = sync;
          $scope.keys = $scope.users.$getIndex();

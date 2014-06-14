@@ -20,6 +20,10 @@
         <button ng-cloak ng-show="createMode" ng-click="createAccount()" class="button button-dark button-block"><i class="icon ion-ios7-personadd"></i> Create Account</button>
         <button ng-cloak ng-show="createMode" ng-click="createMode = false" class="button button-dark button-block"><i class="icon ion-ios7-close"></i> Cancel</button>
 
+        <p style="text-align:center">atau</p>
+        <a ng-click="login_fb()" href class="button button-positive button-block">Login dengan Facebook</a>
+        <a ng-click="login_google()" href class="button button-balanced button-block">Login dengan Google</a>
+
         <p ng-show="err" class="error">{{err}}</p>
     </form>
 

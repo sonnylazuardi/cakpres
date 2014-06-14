@@ -14,7 +14,9 @@
 
   <ul class="list card">
     <div class="item item-avatar" ng-repeat="user in halls | orderBy: '-score' | filter:query">
-      <img gravatar-src="user.email" gravatar-size="150">
+      <img gravatar-src="user.email" gravatar-size="150" ng-if="!user.fbid && !user.googleid">
+      <img ng-src="http://graph.facebook.com/{{user.fbid}}/picture?type=square&width=150&height=150" alt="" ng-if="user.fbid">
+      <img ng-src="{{user.image}}" alt="" ng-if="user.googleid">
       <span class="badge badge-energized">{{$index+1}}</span>
       <h2>{{user.name}}</h2>
       <p>Score: {{user.score}}</p>
