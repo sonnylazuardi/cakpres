@@ -3,7 +3,8 @@
 // Declare app level module which depends on filters, and services
 angular.module('myApp',
       ['myApp.config', 'myApp.routes', 'myApp.filters', 'myApp.services', 'myApp.directives', 'myApp.controllers',
-         'waitForAuth', 'routeSecurity', 'highcharts-ng', 'ui.gravatar', 'ngSanitize', 'QuickList', 'ui.knob']
+         'waitForAuth', 'routeSecurity', 'highcharts-ng', 'ui.gravatar', 'ngSanitize', 'QuickList', 'ui.knob',
+         'djds4rce.angular-socialshare']
    )
 
    .run(function(loginService, $rootScope, FBURL, $http) {
@@ -25,3 +26,7 @@ angular.module('myApp',
 
       }
    });
+
+   // .config(function($locationProvider){
+   //    $locationProvider.html5Mode(true).hashPrefix('!');
+   // });

@@ -181,6 +181,7 @@ angular.module('myApp.controllers', [])
          $scope.score = 0;
          $scope.user = null;
          var sync = syncData(['users', $scope.auth.user.uid]);//.$bind($scope, 'user');
+         $scope.last_badge = 0;
 
          //var score = $scope.user.score;
          sync.$on('loaded', function(data1) {
@@ -222,15 +223,16 @@ angular.module('myApp.controllers', [])
                $scope.count = badgesCount;
                $scope.badgesArr = badgesArr;
                $scope.scoreArr = scoreArr;
+               $scope.last_badge = $scope.badgesArr.length-1;
+               console.log($scope.badgesName[$scope.last_badge]);
+               $scope.$apply();
             }
          });
       });
    })
    
    .controller('HelpCtrl', function($scope, $http, API_KEY) {
-      $http.get('http://api.pemiluapi.org/calonpresiden/api/caleg?apiKey='+API_KEY).success(function(data) {
-         console.log(data);
-      });
+      
    })
 
    .controller('ViolationCtrl', function($scope, $http, $routeParams, Violation) {
