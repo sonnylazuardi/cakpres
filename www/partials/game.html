@@ -4,6 +4,9 @@
   <a class="button icon ion-person" href="#/account">{{user.score}}</a>
 </div>
 
+<audio id="clicktrue" src="sounds/true.mp3"></audio>
+<audio id="clickfalse" src="sounds/false.mp3"></audio>
+
 <div class="content scroll-content has-header padding">
     <div class="row">
       <div class="col-xs-10">
@@ -43,8 +46,6 @@
         <p ng-show="$index > 1">{{calon_nama[correct_answer]}} benar (+1)</p>
       </div>
     </ul>
-    
-
 </div>
 
 <div ng-include src="'partials/footer.html'"></div>

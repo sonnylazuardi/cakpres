@@ -4,7 +4,7 @@
 angular.module('myApp',
       ['myApp.config', 'myApp.routes', 'myApp.filters', 'myApp.services', 'myApp.directives', 'myApp.controllers',
          'waitForAuth', 'routeSecurity', 'highcharts-ng', 'ui.gravatar', 'ngSanitize', 'QuickList', 'ui.knob',
-         'djds4rce.angular-socialshare']
+         'djds4rce.angular-socialshare', 'ngAudio']
    )
 
    .run(function(loginService, $rootScope, FBURL, $http) {
